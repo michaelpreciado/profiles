@@ -1,0 +1,11 @@
+virtual-business-card/
+├── public/
+│   ├── index.html
+│   └── mp.jpeg
+├── src/
+│   ├── components/
+│   │   └── ProfileCard.js
+│   ├── styles/
+│   │   └── ProfileCard.css
+│   ├── App.js
+│   └── index.js 

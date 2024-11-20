@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&display=swap');
+
 *{
   margin: 0;
   padding: 0;
@@ -6,7 +9,7 @@
 body{
   height: 100vh;
   width: 100vw;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Source Code Pro', 'Fira Code', monospace;
   font-weight: 300;
   font-size: 16px;
   color: white;
@@ -21,7 +24,7 @@ html, body{
  #particles-js{
 	width: 100%;
 	height: 100%;
-	background: #111111;
+	background: #000000;
  }
 
 img{
@@ -66,6 +69,8 @@ input{
           transform: rotateX(55deg) rotateY(9deg) rotateZ(-40deg);
   -webkit-transition: all .5s ease-in;
           transition: all .5s ease-in;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.1),
+              0 0 15px rgba(255, 255, 255, 0.05);
 }
 /*
 *:checked + .profile-card{
@@ -80,11 +85,14 @@ input{
   top: 0;
   width: 300px;
   height: 249px;
-  background-color: rgb(45,45,45);
+  background-color: rgba(26, 31, 35, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   text-align: right;
   z-index: -1;
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 .profile-card header:before,
 .profile-card header:after{
@@ -94,7 +102,7 @@ input{
   content: '';
   height: 10px;
   width: 100%;
-  background-color: rgb(35,35,35);
+  background-color: rgba(21, 25, 28, 0.8);
   -webkit-transform: rotateX(90deg);
           transform: rotateX(90deg);
   -webkit-transform-origin: 0 100% 0;
@@ -106,34 +114,60 @@ input{
   width: 10px;
   -webkit-transform: rotateY(90deg);
           transform: rotateY(90deg);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05)
+  );
 }
-.profile-card header>a{
+.profile-card header>.profile-image {
   display: block;
-  background-color: rgba(0,0,0, .2);
+  background-color: rgba(26, 31, 35, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   width: 100%;
-  height: 83.333px;
+  height: 90px;
+  padding: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-.profile-card header>a>img{
-  margin: 10px;
-  height: 63.333px;
-  width: 63.333px;
+.profile-card header>.profile-image>img {
+  margin: 0;
+  height: 70px;
+  width: 70px;
+  border-radius: 5px;
+  object-fit: cover;
+  float: right;
+  margin-right: 10px;
 }
 .profile-card  h1{
-  padding: 10px 20px 0;
-  font-size: 32px;
-  font-weight: 300;
+  padding: 5px 20px 0;
+  font-size: 24px;
+  font-weight: 400;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: -0.5px;
+  clear: both;
 }
 .profile-card h2{
-  font-size: 19px;
+  font-size: 14px;
   font-weight: 300;
   text-transform: uppercase;
-  color: rgba(255,255,255, .5);
-  padding: 0 20px;  
+  color: rgba(255,255,255, .7);
+  padding: 0 20px;
+  font-family: 'Source Code Pro', monospace;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
 }
 .profile-card .profile-bio{
-  margin: 156.666px 0 0 100px;
-  padding: 10px 20px;
+  margin: 156px 0 0 100px;
+  padding: 8px 20px;
   text-align: right;
+  font-family: 'Source Code Pro', monospace;
+  letter-spacing: 0.5px;
+}
+.profile-card .profile-bio p {
+  line-height: 1.4;
+  font-size: 13px;
+  margin-bottom: 4px;
 }
 .profile-card .profile-social-links{
   position: absolute;
@@ -146,15 +180,21 @@ input{
 }
 .profile-card .profile-social-links li{
   display: block;
-  height: 33.4%;
+  height: 25%;
   width: 100%;
   list-style: none;
-  background-color: rgb(158, 158, 158);
+  background-color: rgba(158, 158, 158, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
   -webkit-transform: translateZ(1px);
           transform: translateZ(1px);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  will-change: transform;
   -webkit-transition: all .4s;
           transition: all .4s;
 }
@@ -165,7 +205,7 @@ input{
   content: '';
   height: 100%;
   width: 10px;
-  background-color: rgb(158, 158, 158);
+  background-color: rgba(158, 158, 158, 0.9);
   -webkit-transform: rotateY(90deg);
           transform: rotateY(90deg);
   -webkit-transform-origin: 0 0;
@@ -179,40 +219,66 @@ input{
           transform: rotateX(-90deg);
 }
 .profile-card .profile-social-links li:hover{
-  -webkit-transform: translateZ(9px);
-          transform: translateZ(9px);
+  transform: translateZ(5px);
+  transition: transform 0.2s ease-out;
 }
-.profile-card .profile-social-links li:first-child{
-  background-color: rgb(42,169,224);
+.profile-card .profile-social-links li:nth-child(1){
+  background-color: rgba(29, 161, 242, 0.7);
 }
-.profile-card .profile-social-links li:first-child:before,
-.profile-card .profile-social-links li:first-child:after{
-  background-color: rgb(32,159,214);
+.profile-card .profile-social-links li:nth-child(1):before,
+.profile-card .profile-social-links li:nth-child(1):after{
+  background-color: #0d8ad9;
 }
-.profile-card .profile-social-links li:last-child{
-  background-color: rgb(43, 102, 170);
+.profile-card .profile-social-links li:nth-child(2){
+  background-color: rgba(36, 41, 46, 0.7);
 }
-.profile-card .profile-social-links li:last-child:before,
-.profile-card .profile-social-links li:last-child:after{
-  background-color: rgb(43, 102, 170);
+.profile-card .profile-social-links li:nth-child(2):before,
+.profile-card .profile-social-links li:nth-child(2):after{
+  background-color: #1a1f23;
+}
+.profile-card .profile-social-links li:nth-child(3){
+  background-color: rgba(0, 119, 181, 0.7);
+}
+.profile-card .profile-social-links li:nth-child(3):before,
+.profile-card .profile-social-links li:nth-child(3):after{
+  background-color: #006396;
+}
+.profile-card .profile-social-links li:nth-child(4){
+  background-color: rgba(26, 31, 35, 0.7);
+  transition: all 0.2s ease-out;
+  transform: translateZ(1px);
+  backface-visibility: hidden;
+}
+.profile-card .profile-social-links li:nth-child(4):before,
+.profile-card .profile-social-links li:nth-child(4):after{
+  background-color: #15191c;
+  transition: all 0.2s ease-out;
+}
+.profile-card .profile-social-links li:nth-child(4):hover {
+  transform: translateZ(5px);
+}
+.profile-card .profile-social-links li:nth-child(4) a{
+  transition: transform 0.2s ease-out;
+  backface-visibility: hidden;
+}
+.profile-card .profile-social-links li:nth-child(4):hover a{
+  transform: scale(1.05);
 }
 .profile-card .profile-social-links li a{
   display: block;
   height: 100%;
   width: 100%;
-  padding: 20px;
+  padding: 15px;
   text-align: center;
-  -webkit-transition: all .3s;
-          transition: all .3s;
-  font-size: 40px;
-  line-height: 45px;
+  transition: transform 0.2s ease-out;
+  font-size: 35px;
+  line-height: 35px;
   text-decoration: none;
-  color: rgb(45,45,45);
+  color: #ffffff;
+  transform: translateZ(0);
 }
 .profile-card .profile-social-links li:hover a{
-  -webkit-transform: scale(1.1);
-      -ms-transform: scale(1.1);
-          transform: scale(1.1);
+  transform: scale(1.05);
 }
 .Project_Container {
   align-items: center;
