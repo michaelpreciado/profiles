@@ -9,19 +9,21 @@
 .projects-header {
     text-align: center;
     margin-bottom: 3rem;
+    margin-top: 3rem;
     color: white;
     font-family: 'Fira Code', monospace;
 }
 
 .back-button {
-    position: fixed;
-    top: 20px;
+    position: absolute;
+    top: 30px;
     left: 20px;
     color: white;
     text-decoration: none;
     font-size: 1.2rem;
     transition: color 0.3s ease;
     font-family: 'Source Code Pro', monospace;
+    z-index: 10;
 }
 
 .back-button:hover {
@@ -123,5 +125,10 @@
     
     .projects-container {
         padding: 1rem;
+    }
+
+    .back-button {
+        top: 20px;
+        left: 10px;
     }
 } 
