@@ -1,0 +1,135 @@
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: Consolas, monospace;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-family: Consolas, monospace;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.hamburger-menu {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.hamburger-menu:hover {
+    color: rgba(29, 161, 242, 0.7);
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1001;
+    transition: right 0.3s ease-in-out;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.sidebar-content {
+    padding: 2rem;
+    color: white;
+    font-family: Consolas, monospace;
+}
+
+.sidebar-content h2 {
+    font-family: Consolas, monospace;
+    font-weight: normal;
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+}
+
+.close-sidebar {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+    font-family: Consolas, monospace;
+}
+
+.close-sidebar:hover {
+    color: rgba(29, 161, 242, 0.7);
+}
+
+.contact-info {
+    margin-top: 2rem;
+}
+
+.contact-item {
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: Consolas, monospace;
+}
+
+.contact-item i {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.2rem;
+    width: 20px;
+}
+
+.contact-item a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-family: Consolas, monospace;
+    font-size: 0.9rem;
+}
+
+.contact-item a:hover {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        right: -100%;
+        background: rgba(0, 0, 0, 0.6);
+    }
+    
+    .header-content {
+        padding: 0 1rem;
+    }
+} 

@@ -4,14 +4,25 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .projects-header {
     text-align: center;
-    margin-bottom: 3rem;
-    margin-top: 3rem;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
     color: white;
-    font-family: 'Fira Code', monospace;
+    font-family: Consolas, monospace;
+    position: relative;
+    z-index: 4;
+    background: linear-gradient(to bottom, 
+        rgba(0,0,0,1) 0%, 
+        rgba(0,0,0,1) 60%, 
+        rgba(0,0,0,0) 100%);
+    margin-bottom: 0;
+    height: 150px;
 }
 
 .back-button {
@@ -22,7 +33,7 @@
     text-decoration: none;
     font-size: 1.2rem;
     transition: color 0.3s ease;
-    font-family: 'Source Code Pro', monospace;
+    font-family: Consolas, monospace;
     z-index: 10;
 }
 
@@ -37,56 +48,136 @@
     padding: 1rem;
 }
 
-.project-card {
-    background: rgba(26, 31, 35, 0.7);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.1),
-                0 0 15px rgba(255, 255, 255, 0.05);
+.projects-carousel {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    flex: 1;
+    margin: -4rem auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0;
+    overflow: visible;
+    z-index: 1;
 }
 
-.project-card:hover {
-    transform: translateY(-5px) translateZ(10px);
+.projects-track {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+    position: relative;
+    height: 100%;
+    perspective: 1000px;
+}
+
+.project-card {
+    min-width: 100%;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                backdrop-filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: absolute;
+    opacity: 0;
+    transform: translateY(100px) scale(0.7);
+    pointer-events: none;
+    background: rgba(26, 31, 35, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    visibility: hidden;
+}
+
+.project-card.active {
+    opacity: 1;
+    transform: translateY(40px) scale(1.05);
+    z-index: 2;
+    pointer-events: all;
+    visibility: visible;
+    background: rgba(26, 31, 35, 0.95);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+}
+
+.project-card.prev {
+    transform: translateY(-400px) scale(0.75);
+    opacity: 0;
+    z-index: 1;
+    visibility: hidden;
+    pointer-events: none;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.project-card.far-prev {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.project-card.far-far-prev {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.project-card.next {
+    transform: translateY(480px) scale(0.75);
+    opacity: 0.5;
+    z-index: 1;
+    visibility: visible;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: rgba(26, 31, 35, 0.6);
+}
+
+.project-card.far-next {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 }
 
 .project-image {
     width: 100%;
-    height: 200px;
+    height: 250px;
     overflow: hidden;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    background-color: rgba(21, 25, 28, 0.8);
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .project-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    padding: 0;
 }
 
 .project-info {
-    padding: 1.5rem;
-    font-family: 'Source Code Pro', monospace;
+    padding: 1.2rem;
+    font-family: Consolas, monospace;
 }
 
 .project-info h3 {
     color: white;
     margin-bottom: 1rem;
-    font-size: 1.2rem;
-    font-family: 'Fira Code', monospace;
+    font-size: 1.1rem;
+    font-family: Consolas, monospace;
     letter-spacing: -0.5px;
 }
 
 .project-info p {
     color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
     line-height: 1.4;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     letter-spacing: 0.5px;
 }
 
@@ -100,21 +191,58 @@
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 3px;
-    background: rgba(29, 161, 242, 0.7);
+    background: rgba(29, 161, 242, 0.8);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     transition: all 0.2s ease-out;
     font-size: 0.9rem;
+    font-family: Consolas, monospace;
 }
 
 .project-links a:nth-child(2) {
-    background: rgba(26, 31, 35, 0.7);
+    background: rgba(26, 31, 35, 0.8);
 }
 
 .project-links a:hover {
-    transform: translateZ(5px);
-    filter: brightness(1.2);
+    transform: translateZ(8px) scale(1.05);
+    filter: brightness(1.3);
+}
+
+.carousel-button {
+    background: rgba(29, 161, 242, 0.1);
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: absolute;
+    z-index: 5;
+    color: rgba(255, 255, 255, 0.6);
+    transition: all 0.3s ease;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.carousel-button:hover {
+    background: rgba(29, 161, 242, 0.3);
+    color: rgba(255, 255, 255, 1);
+}
+
+.carousel-button i {
+    font-size: 0.9rem;
+    transform: rotate(90deg);
+}
+
+.carousel-button.prev {
+    top: -40px;
+}
+
+.carousel-button.next {
+    bottom: -15px;
 }
 
 /* Responsive Design */
@@ -131,4 +259,76 @@
         top: 20px;
         left: 10px;
     }
+
+    .projects-carousel {
+        padding-top: 2rem;
+        max-width: 90%;
+    }
+    
+    .carousel-button {
+        width: 25px;
+        height: 25px;
+    }
+    
+    .carousel-button i {
+        font-size: 0.8rem;
+    }
+    
+    .carousel-button.prev {
+        top: -30px;
+    }
+    
+    .carousel-button.next {
+        bottom: -12px;
+    }
+
+    .project-card.prev {
+        transform: translateY(-350px) scale(0.7);
+    }
+    
+    .project-card.next {
+        transform: translateY(400px) scale(0.7);
+    }
+    
+    .project-card.far-prev {
+        transform: translateY(-500px) scale(0.7);
+    }
+    
+    .project-card.far-next {
+        transform: translateY(500px) scale(0.7);
+    }
+
+    .project-card.active {
+        transform: translateY(40px) scale(1.02);
+    }
+} 
+
+/* Add these new styles for coming soon cards */
+.project-image.coming-soon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(29, 161, 242, 0.15);
+    height: 250px;
+    padding: 20px;
+}
+
+.project-image.coming-soon i {
+    font-size: 5rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.coming-soon-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    font-family: Consolas, monospace;
+}
+
+.coming-soon-badge i {
+    margin-right: 5px;
 } 
