@@ -6,9 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     let currentIndex = 0;
     let isScrolling = false;
-    let scrollTimeout;
-    let scrollAccumulator = 0;
-    const scrollThreshold = 50; // Adjust this value to change sensitivity
+    let touchStartY = 0;
+    let touchEndY = 0;
+    const touchThreshold = 30;
     
     function updateCards() {
         cards.forEach((card, index) => {
@@ -30,16 +30,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.classList.add('far-next');
             }
         });
+
+        // Update button states
+        updateButtonStates();
     }
     
+    function updateButtonStates() {
+        // Update visual state of buttons
+        prevButton.style.opacity = currentIndex > 0 ? "1" : "0.5";
+        nextButton.style.opacity = currentIndex < cards.length - 1 ? "1" : "0.5";
+        
+        // Add/remove active class for animation
+        prevButton.classList.toggle('active', currentIndex > 0);
+        nextButton.classList.toggle('active', currentIndex < cards.length - 1);
+    }
+
     function nextSlide() {
         if (currentIndex < cards.length - 1 && !isScrolling) {
             isScrolling = true;
             currentIndex++;
             updateCards();
+            // Animate next button
+            nextButton.classList.add('clicked');
             setTimeout(() => {
+                nextButton.classList.remove('clicked');
                 isScrolling = false;
-            }, 600); // Match this with your CSS transition duration
+            }, 400);
         }
     }
     
@@ -48,71 +64,27 @@ document.addEventListener('DOMContentLoaded', () => {
             isScrolling = true;
             currentIndex--;
             updateCards();
+            // Animate prev button
+            prevButton.classList.add('clicked');
             setTimeout(() => {
+                prevButton.classList.remove('clicked');
                 isScrolling = false;
-            }, 600); // Match this with your CSS transition duration
+            }, 400);
         }
     }
     
-    // Initialize first card as active
+    // Initialize
     updateCards();
     
-    // Smooth scroll handling
-    function handleScroll(e) {
-        e.preventDefault();
-        
-        // Accumulate scroll values
-        scrollAccumulator += e.deltaY;
-        
-        // Clear existing timeout
-        clearTimeout(scrollTimeout);
-        
-        // Set new timeout for scroll end detection
-        scrollTimeout = setTimeout(() => {
-            scrollAccumulator = 0;
-        }, 150);
-        
-        // Check if accumulated scroll passes threshold
-        if (Math.abs(scrollAccumulator) >= scrollThreshold) {
-            if (scrollAccumulator > 0) {
-                nextSlide();
-            } else {
-                prevSlide();
-            }
-            scrollAccumulator = 0; // Reset accumulator after action
-        }
-    }
-    
-    // Add keyboard navigation with smooth scrolling prevention
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowUp') {
-            e.preventDefault();
-            prevSlide();
-        } else if (e.key === 'ArrowDown') {
-            e.preventDefault();
-            nextSlide();
-        }
-    });
-    
-    // Button click handlers
-    nextButton.addEventListener('click', nextSlide);
-    prevButton.addEventListener('click', prevSlide);
-    
-    // Smooth scroll wheel navigation
-    track.addEventListener('wheel', handleScroll, { passive: false });
-    
-    // Touch handling for mobile
-    let touchStartY = 0;
-    let touchEndY = 0;
-    const touchThreshold = 50;
-    
+    // Touch handling
     track.addEventListener('touchstart', (e) => {
         touchStartY = e.touches[0].clientY;
     }, { passive: true });
     
     track.addEventListener('touchmove', (e) => {
+        e.preventDefault();
         touchEndY = e.touches[0].clientY;
-    }, { passive: true });
+    }, { passive: false });
     
     track.addEventListener('touchend', () => {
         const touchDiff = touchStartY - touchEndY;
@@ -123,5 +95,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 prevSlide();
             }
         }
-    }, { passive: true });
+    });
+    
+    // Mouse wheel handling
+    track.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        if (e.deltaY > 0) {
+            nextSlide();
+        } else {
+            prevSlide();
+        }
+    }, { passive: false });
+    
+    // Button clicks
+    nextButton.addEventListener('click', nextSlide);
+    prevButton.addEventListener('click', prevSlide);
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            prevSlide();
+        } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            nextSlide();
+        }
+    });
 }); 

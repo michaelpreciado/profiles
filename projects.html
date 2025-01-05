@@ -15,7 +15,7 @@
     <!-- Add header -->
     <header class="main-header">
         <div class="header-content">
-            <a href="index.html" class="logo">Michael Preciado</a>
+            <a href="index.html" class="logo">MP</a>
             <button class="hamburger-menu" onclick="toggleSidebar()">
                 <i class="fa fa-bars"></i>
             </button>
@@ -30,124 +30,115 @@
             </button>
             <h2>Contact Me</h2>
             <div class="contact-info">
+                <div class="contact-item title">
+                    <i class="fa fa-code"></i>
+                    <span>Full Stack Developer & AI Consultant</span>
+                </div>
                 <div class="contact-item">
                     <i class="fa fa-envelope"></i>
                     <a href="mailto:mpreciado1997@gmail.com">mpreciado1997@gmail.com</a>
                 </div>
                 <div class="contact-item">
                     <i class="fa fa-linkedin"></i>
-                    <a href="https://www.linkedin.com/in/michael-preciado-74959b227/" target="_blank">LinkedIn Profile</a>
+                    <a href="https://linkedin.com/in/michael-preciado" target="_blank">LinkedIn Profile</a>
                 </div>
                 <div class="contact-item">
                     <i class="fa fa-github"></i>
                     <a href="https://github.com/michaelpreciado" target="_blank">GitHub Profile</a>
                 </div>
-                <div class="contact-item">
-                    <i class="fa fa-twitter"></i>
-                    <a href="https://x.com/mpdollars" target="_blank">X Profile</a>
-                </div>
+            </div>
+            <div class="location-info">
+                <p>
+                    <i class="fa fa-map-marker"></i>
+                    <i class="fa fa-flag-usa"></i>
+                    Northern California, USA
+                </p>
             </div>
         </div>
     </div>
 
     <!-- Rest of your existing content -->
-    <div class="projects-container">
+    <div class="projects-container" role="main">
         <header class="projects-header">
-            <h1>My Projects</h1>
-            <a href="index.html" class="back-button">
-                <i class="fa fa-arrow-left"></i> Back to Card
+            <h1>Projects</h1>
+            <a href="index.html" class="back-button" aria-label="Return to profile page">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to Profile
             </a>
         </header>
-
-        <div class="projects-carousel">
-            <button class="carousel-button prev">
-                <i class="fa fa-chevron-left"></i>
-            </button>
-            
-            <div class="projects-track">
-                <!-- Project Card 1 -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="public/djset.jpg" alt="Mario Preciado Photography">
-                    </div>
-                    <div class="project-info">
-                        <h3>Mario Preciado Photography landing page</h3>
-                        <p>A professional photography portfolio website showcasing the artistic work and services of freelance photographer Mario Preciado. Features a dynamic gallery, booking system, and responsive design to display high-quality photography across all devices.</p>
-                        <div class="project-links">
-                            <a href="https://github.com/michaelpreciado/mario.preciado.photography" target="_blank"><i class="fa fa-github"></i> Code</a>
-                            <a href="https://michaelpreciado.github.io/mario.preciado.photography/" target="_blank"><i class="fa fa-external-link"></i> Live Site</a>
-                        </div>
+        
+        <div class="projects-track">
+            <!-- Project Card 1 (Personal Film Photography) -->
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="public/mp.jpeg" alt="Film Photography Portfolio Preview">
+                </div>
+                <div class="project-info">
+                    <h2>Film Photography Portfolio</h2>
+                    <p>Personal collection of film photography capturing moments in analog. Shot on various film cameras and formats, focusing on street photography and portraiture.</p>
+                    <div class="project-links">
+                        <a href="https://michaelpreciado.github.io/MP.FIlmCollection/" target="_blank"><i class="fa fa-camera-retro"></i> View Gallery</a>
                     </div>
                 </div>
+            </article>
 
-                <!-- Project Card 2 -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="public/michael.jpg" alt="Personal Film Collection">
-                    </div>
-                    <div class="project-info">
-                        <h3>Michael's Film Collection</h3>
-                        <p>A searchable database of my personal film collection, featuring details like genres, directors, and ratings. Built with modern web technologies.</p>
-                        <div class="project-links">
-                            <a href="https://github.com/michaelpreciado/MP.FIlmCollection" target="_blank"><i class="fa fa-github"></i> Code</a>
-                            <a href="https://michaelpreciado.github.io/MP.FIlmCollection/" target="_blank"><i class="fa fa-external-link"></i> Live Site</a>
-                        </div>
+            <!-- Project Card 2 (Photography Website) -->
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="public/djset.jpg" alt="Photography Portfolio Website Preview">
+                </div>
+                <div class="project-info">
+                    <h2>Photography Portfolio Website</h2>
+                    <p>Custom-built portfolio website for freelance photographers. Features include gallery management, booking system, and client galleries with modern, minimalist design.</p>
+                    <div class="project-links">
+                        <a href="https://michaelpreciado.github.io/mario.preciado.photography/" target="_blank"><i class="fa fa-globe"></i> Live Demo</a>
                     </div>
                 </div>
+            </article>
 
-                <!-- Project Card 3 - Coming Soon -->
-                <div class="project-card">
-                    <div class="project-image coming-soon">
-                        <i class="fa fa-code"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3>AI-Powered Project</h3>
-                        <p>An exciting new project leveraging artificial intelligence and machine learning technologies. Stay tuned for more details!</p>
-                        <div class="project-links">
-                            <span class="coming-soon-badge"><i class="fa fa-clock-o"></i> Coming Soon</span>
-                        </div>
+            <!-- Project Card 3 (AI Project - Coming Soon) -->
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995" alt="AI-Powered Assistant Preview">
+                </div>
+                <div class="project-info">
+                    <h2>AI-Powered Assistant</h2>
+                    <p>Coming Soon: Intelligent assistant leveraging latest AI technologies for personalized task management and workflow optimization.</p>
+                    <ul class="skills-list">
+                        <li>Large Language Models</li>
+                        <li>Natural Language Processing</li>
+                        <li>Custom AI Training & Integration</li>
+                    </ul>
+                    <div class="project-links">
+                        <a href="#" class="disabled"><i class="fa fa-robot"></i> Coming Soon</a>
                     </div>
                 </div>
+            </article>
 
-                <!-- Project Card 4 - Coming Soon -->
-                <div class="project-card">
-                    <div class="project-image coming-soon">
-                        <i class="fa fa-mobile"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3>Mobile App Development</h3>
-                        <p>A cross-platform mobile application focused on enhancing user productivity and daily workflow management.</p>
-                        <div class="project-links">
-                            <span class="coming-soon-badge"><i class="fa fa-clock-o"></i> Coming Soon</span>
-                        </div>
+            <!-- Project Card 4 (Mobile App - Coming Soon) -->
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c" alt="Mobile App Development Preview">
+                </div>
+                <div class="project-info">
+                    <h2>Mobile App Development</h2>
+                    <p>Coming Soon: Cross-platform mobile application focused on lifestyle and productivity. Built with React Native and modern mobile development practices.</p>
+                    <ul class="skills-list">
+                        <li>React Native & TypeScript</li>
+                        <li>Native iOS & Android Features</li>
+                        <li>Cloud Integration & Real-time Updates</li>
+                    </ul>
+                    <div class="project-links">
+                        <a href="#" class="disabled"><i class="fa fa-mobile"></i> Coming Soon</a>
                     </div>
                 </div>
-
-                <!-- Project Card 5 - Coming Soon -->
-                <div class="project-card">
-                    <div class="project-image coming-soon">
-                        <i class="fa fa-database"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3>Data Analytics Dashboard</h3>
-                        <p>A comprehensive data visualization platform providing real-time insights and interactive analytics tools.</p>
-                        <div class="project-links">
-                            <span class="coming-soon-badge"><i class="fa fa-clock-o"></i> Coming Soon</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <button class="carousel-button next">
-                <i class="fa fa-chevron-right"></i>
-            </button>
+            </article>
         </div>
     </div>
     <div id="particles-js"></div>
     <script src='https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js'></script>
+    <script src="https://kit.fontawesome.com/2ee2f92aca.js" crossorigin="anonymous"></script>
     <script src="./header.js"></script>
     <script src="./script.js"></script>
-    <script src="./carousel.js"></script>
 </body>
 
 </html> 
