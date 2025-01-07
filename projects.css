@@ -1,6 +1,6 @@
 /* Projects Container */
 .projects-container {
-    max-width: 550px;
+    max-width: 450px;
     margin: 0 auto;
     padding: 6rem 2rem 2rem;
     position: relative;
@@ -82,9 +82,9 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    max-width: 550px;
+    max-width: 450px;
     margin: 0 auto;
-    min-height: 300px;
+    min-height: 280px;
 }
 
 @keyframes cardFadeIn {
@@ -126,7 +126,7 @@
 
 .project-image {
     width: 100%;
-    height: 200px;
+    height: 180px;
     overflow: hidden;
     border-bottom: 1px solid var(--term-cyan-dark);
     position: relative;
@@ -149,7 +149,7 @@
 }
 
 .project-info {
-    padding: 0.8rem;
+    padding: 0.8rem 1.2rem;
     position: relative;
     z-index: 2;
     flex: 1;
@@ -259,13 +259,17 @@
 /* Mobile Optimization */
 @media (max-width: 768px) {
     .projects-container {
-        max-width: 90%;
+        max-width: 85%;
         padding: 5rem 1rem 2rem;
     }
 
     .project-card {
         min-height: 250px;
         max-width: 100%;
+    }
+
+    .project-image {
+        height: 160px;
     }
 
     .project-info p {
