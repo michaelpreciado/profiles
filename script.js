@@ -2,10 +2,10 @@
 particlesJS("particles-js", {
   "particles": {
     "number": {
-      "value": 80,
+      "value": 60,
       "density": {
         "enable": true,
-        "value_area": 800
+        "value_area": 1000
       }
     },
     "color": {
@@ -19,7 +19,7 @@ particlesJS("particles-js", {
       }
     },
     "opacity": {
-      "value": 0.3,
+      "value": 0.25,
       "random": true,
       "anim": {
         "enable": true,
@@ -86,5 +86,69 @@ particlesJS("particles-js", {
     }
   },
   "retina_detect": true
+});
+
+// Enhanced Intersection Observer for card animations
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.profile-card, .bio-card');
+    
+    // Set initial state
+    cards.forEach((card, index) => {
+        card.style.setProperty('--card-index', index);
+        card.classList.add('card-hidden');
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Add a slight delay based on card index
+                setTimeout(() => {
+                    entry.target.classList.remove('card-hidden');
+                    entry.target.classList.add('card-visible');
+                }, entry.target.style.getPropertyValue('--card-index') * 150);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.2,
+        rootMargin: '-50px'
+    });
+
+    cards.forEach(card => observer.observe(card));
+});
+
+// Enhanced hover effects for social links
+document.querySelectorAll('.profile-social-links a').forEach(link => {
+    link.addEventListener('mouseenter', () => {
+        link.style.transform = 'translateY(-2px) scale(1.1)';
+        link.style.boxShadow = '0 0 15px var(--term-cyan)';
+    });
+
+    link.addEventListener('mouseleave', () => {
+        link.style.transform = 'none';
+        link.style.boxShadow = 'none';
+    });
+});
+
+// Adjust particles opacity on scroll
+window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const opacity = Math.max(0.3, 1 - (scrolled / maxScroll));
+    document.getElementById('particles-js').style.opacity = opacity;
+});
+
+// Smooth scroll behavior
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
 });
 
