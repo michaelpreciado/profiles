@@ -107,6 +107,8 @@ body::before {
     -webkit-backdrop-filter: brightness(0.9);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     margin-top: 2rem;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
 }
 
 /* TV Scan Line Effect */
@@ -459,6 +461,8 @@ body::before {
         top: 0;
         transform: translateX(-50%);
         margin-top: 100px;
+        margin-bottom: 2.5rem;
+        padding-bottom: 0.8rem;
         scale: 0.85;
     }
     
