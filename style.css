@@ -454,28 +454,29 @@ body::before {
 /* Mobile Optimization */
 @media (max-width: 768px) {
     .profile-card {
-        max-width: 360px;
-        min-width: 300px;
+        max-width: 300px;
+        min-width: 260px;
         top: 0;
         transform: translateX(-50%);
         margin-top: 100px;
+        scale: 0.85;
     }
     
     .profile-card header {
-        padding: 0.8rem 1.2rem;
+        padding: 0.6rem 1rem;
     }
     
     .profile-image {
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
     }
     
     .profile-bio {
-        padding: 0.6rem 1.2rem;
+        padding: 0.5rem 1rem;
     }
     
     .profile-card h1 {
-        font-size: calc(var(--font-size-xl) * 2);
+        font-size: calc(var(--font-size-xl) * 1.8);
     }
     
     .profile-card h2 {
@@ -509,4 +510,33 @@ body::before {
 
 .profile-social-links a span {
     font-size: 0.5rem;
+}
+
+/* Signature */
+.signature {
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--term-cyan-dim);
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    text-align: center;
+    z-index: 100;
+    text-shadow: 0 0 5px var(--term-cyan);
+    opacity: 0.7;
+    letter-spacing: 0.05em;
+}
+
+.signature span {
+    color: var(--term-cyan-bright);
+    font-weight: 700;
+}
+
+/* Mobile signature adjustment */
+@media (max-width: 768px) {
+    .signature {
+        bottom: 0.5rem;
+        font-size: 0.6rem;
+    }
 }
