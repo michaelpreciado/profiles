@@ -2,13 +2,13 @@
    Design System Variables - Adjusted for smaller sizes
    ========================================================================== */
 :root {
-    /* Colors */
-    --term-cyan: #00E6E6;
+    /* Colors - Adjusted to be more blue and brighter */
+    --term-cyan: #00E6FF;
     --term-cyan-bright: #00FFFF;
-    --term-cyan-dim: rgba(0, 230, 230, 0.7);
-    --term-cyan-dark: rgba(0, 230, 230, 0.3);
-    --term-bg: #000000;
-    --term-overlay: rgba(0, 230, 230, 0.05);
+    --term-cyan-dim: rgba(0, 230, 255, 0.7);
+    --term-cyan-dark: rgba(0, 230, 255, 0.3);
+    --term-bg: #001215;
+    --term-overlay: rgba(0, 230, 255, 0.05);
     
     /* Typography - Reduced sizes */
     --font-mono: 'Share Tech Mono', 'Courier New', monospace;
@@ -20,8 +20,8 @@
     --font-size-2xl: clamp(1.75rem, 1.5rem + 1.5vw, 2.25rem);
     
     /* Effects */
-    --term-glow: 0 0 10px rgba(0, 230, 230, 0.3);
-    --term-glow-strong: 0 0 20px rgba(0, 230, 230, 0.5);
+    --term-glow: 0 0 10px rgba(0, 230, 255, 0.6);
+    --term-glow-strong: 0 0 20px rgba(0, 230, 255, 0.8);
     
     /* Spacing - Reduced for compactness */
     --space-xs: clamp(0.25rem, 0.2rem + 0.25vw, 0.5rem);
@@ -49,6 +49,8 @@ body {
     align-items: center;
     gap: var(--space-lg);
     overflow-x: hidden;
+    position: relative;
+    isolation: isolate;
 }
 
 .content-container {
@@ -59,7 +61,12 @@ body {
     flex-direction: column;
     align-items: center;
     gap: var(--space-xl);
-    padding-top: var(--space-4xl);
+    padding-top: var(--space-xl);
+    position: relative;
+}
+
+.content-container::before {
+    display: none;
 }
 
 /* ==========================================================================
@@ -68,26 +75,36 @@ body {
 .profile-card {
     width: 100%;
     max-width: min(85vw, 400px);
-    background: rgba(0, 0, 0, 0.9);
+    background: transparent;
     border: 2px solid var(--term-cyan-dark);
     border-radius: 12px;
     box-shadow: var(--term-glow);
-    margin: var(--space-3xl) auto var(--space-xl);
+    margin: 0 auto var(--space-sm);
     padding: 0;
-    position: relative;
+    position: sticky;
+    top: var(--space-xl);
     overflow: hidden;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: center;
+    transition: none;
+    transform: none !important;
+    isolation: isolate;
+    z-index: 10;
+}
+
+.profile-card,
+.profile-card * {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
 }
 
 .profile-card header {
     width: 100%;
     padding: var(--space-md) var(--space-md) var(--space-md) var(--space-2xl);
-    background: rgba(0, 0, 0, 0.9);
+    background: transparent;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -123,12 +140,17 @@ body {
     text-align: left;
     padding: 0;
     margin: 0;
+    position: relative;
+    z-index: 3;
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
 }
 
 .profile-card h1 {
     font-size: calc(var(--font-size-2xl) * 1.5);
     margin: 0 0 var(--space-2xs);
-    color: var(--term-cyan-bright);
+    color: #FFFFFF;
     text-shadow: var(--term-glow);
     line-height: 1;
     text-align: left;
@@ -152,7 +174,7 @@ body {
     margin: 0;
     justify-content: center;
     align-items: center;
-    background: rgba(0, 0, 0, 0.95);
+    background: transparent;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
@@ -194,13 +216,14 @@ body {
     max-width: min(85vw, 280px);
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
-    margin: 0 auto;
+    gap: var(--space-xl);
+    margin: var(--space-md) auto;
+    animation: none;
 }
 
 .bio-card {
     width: 100%;
-    background: rgba(0, 0, 0, 0.9);
+    background: transparent;
     border: 2px solid var(--term-cyan-dark);
     border-radius: 12px;
     box-shadow: var(--term-glow);
@@ -211,6 +234,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    isolation: isolate;
+    z-index: 1;
+    overflow: hidden;
 }
 
 .bio-card-icon {
@@ -245,7 +271,7 @@ body {
     margin-bottom: var(--space-sm);
     padding: var(--space-sm);
     border-bottom: 1px solid var(--term-cyan-dark);
-    background: rgba(0, 0, 0, 0.95);
+    background: transparent;
 }
 
 .bio-card p {
@@ -272,26 +298,91 @@ body {
 }
 
 @keyframes scanline {
-    from { transform: translateY(0); }
-    to { transform: translateY(100%); }
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
 }
 
-/* Scanline Effect */
-.profile-card::before {
+@keyframes staticEffect {
+    0% { opacity: 0.7; }
+    50% { opacity: 0.9; }
+    100% { opacity: 0.7; }
+}
+
+/* TV Static Effect */
+@keyframes tvStatic {
+    0% { background-position: 0 0; }
+    100% { background-position: 100% 100%; }
+}
+
+/* Remove the display: none from individual card effects */
+.profile-card::before,
+.bio-card::before,
+.project-card::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        transparent 50%,
-        rgba(0, 230, 230, 0.025) 50%
-    );
-    background-size: 100% 4px;
+    background: 
+        linear-gradient(
+            transparent 50%,
+            rgba(0, 230, 255, 0.025) 50%
+        ),
+        repeating-linear-gradient(
+            transparent 0px,
+            transparent 1px,
+            rgba(0, 230, 255, 0.05) 2px,
+            rgba(0, 230, 255, 0.05) 3px
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(0, 230, 255, 0.05) 0%,
+            transparent 100%
+        );
+    background-size: 100% 4px, 100% 4px, 100% 100%;
     pointer-events: none;
-    animation: scanline 8s linear infinite;
-    opacity: 0.3;
+    animation: 
+        terminalScanline 8s linear infinite,
+        terminalNoise 0.5s steps(5) infinite;
+    opacity: 0.5;
+    z-index: 0;
+    mix-blend-mode: screen;
+}
+
+/* Remove the display: none from individual card effects */
+.profile-card::before,
+.bio-card::before {
+    display: block;
+}
+
+/* Ensure proper layering */
+.profile-card,
+.bio-card,
+.project-card {
+    position: relative;
     z-index: 1;
-    border-radius: 10px;
-    overflow: hidden;
+    background: rgba(0, 18, 21, 0.7);
+    animation: terminalFlicker 5s infinite;
+}
+
+.profile-card > *,
+.bio-card > *,
+.project-card > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Fix for any remaining gaps */
+.profile-card::after,
+.bio-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--term-bg);
+    z-index: -1;
+    border-radius: 12px;
 }
 
 /* Hover Effects */
@@ -337,9 +428,10 @@ body {
     }
 
     .profile-card {
-        margin: var(--space-3xl) auto var(--space-lg);
-        transform: scale(1);
-        animation: none;
+        transform: none !important;
+        margin: var(--space-md) auto var(--space-sm);
+        position: relative;
+        top: 0;
     }
 
     .profile-card header {
@@ -426,8 +518,8 @@ body {
     }
 
     .profile-card {
-        margin: var(--space-2xl) auto var(--space-md);
-        transform: scale(0.98);
+        transform: none !important;
+        margin: var(--space-md) auto var(--space-sm);
     }
 
     .profile-card h1 {
@@ -524,23 +616,6 @@ body {
     z-index: 100;
 }
 
-/* Fix for any remaining gaps */
-.profile-card::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    border-radius: 14px;
-    background: var(--term-bg);
-    z-index: -1;
-}
-
-.profile-card::after {
-    display: none;
-}
-
 /* Add animation keyframes */
 @keyframes cardExpand {
     from {
@@ -592,12 +667,18 @@ body {
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
-    margin: 0 auto;
+    margin: var(--space-sm) auto;
+    position: relative;
+    isolation: isolate;
+}
+
+.project-cards::before {
+    display: none;
 }
 
 .project-card {
     width: 100%;
-    background: rgba(0, 0, 0, 0.9);
+    background: transparent;
     border: 2px solid var(--term-cyan-dark);
     border-radius: 12px;
     box-shadow: var(--term-glow);
@@ -608,6 +689,45 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        linear-gradient(
+            transparent 50%,
+            rgba(0, 230, 255, 0.025) 50%
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0, 230, 255, 0.03),
+            rgba(0, 230, 255, 0.03) 1px,
+            transparent 1px,
+            transparent 2px
+        ),
+        repeating-linear-gradient(
+            transparent 0px,
+            transparent 1px,
+            rgba(0, 230, 255, 0.05) 2px,
+            rgba(0, 230, 255, 0.05) 3px
+        );
+    background-size: 100% 4px, 4px 100%, 100% 4px;
+    pointer-events: none;
+    animation: 
+        scanline 8s linear infinite,
+        staticEffect 0.5s steps(3) infinite;
+    opacity: 0.7;
+    z-index: 0;
+    mix-blend-mode: overlay;
+}
+
+.project-card > * {
+    position: relative;
+    z-index: 1;
 }
 
 .project-card:nth-child(1) { animation-delay: 0.1s; }
@@ -648,7 +768,7 @@ body {
     margin-bottom: var(--space-sm);
     padding: var(--space-sm);
     border-bottom: 1px solid var(--term-cyan-dark);
-    background: rgba(0, 0, 0, 0.95);
+    background: transparent;
 }
 
 .project-card img {
@@ -788,22 +908,32 @@ body {
     gap: var(--space-xs);
     margin-top: var(--space-xs);
     flex-wrap: wrap;
+    position: relative;
+    z-index: 3;
+    animation: none;
+    opacity: 1 !important;
+    transform: none !important;
 }
 
 .profile-tag {
     display: flex;
     align-items: center;
-    gap: var(--space-2xs);
+    gap: var(--space-xs);
     font-size: var(--font-size-xs);
     color: var(--term-cyan-dim);
     background: rgba(0, 230, 230, 0.05);
     padding: 2px var(--space-xs);
     border-radius: 4px;
     border: 1px solid var(--term-cyan-dark);
+    position: relative;
+    z-index: 3;
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
 }
 
 .profile-tag i {
-    font-size: calc(var(--font-size-xs) * 0.9);
+    font-size: calc(var(--font-size-xs) * 0.6);
     color: var(--term-cyan-bright);
     text-shadow: var(--term-glow);
 }
@@ -829,4 +959,372 @@ body {
         font-size: calc(var(--font-size-xs) * 0.9);
         padding: 1px var(--space-2xs);
     }
+}
+
+/* Fallout 4 Terminal Effects */
+@keyframes terminalFlicker {
+    0% { opacity: 1; }
+    3% { opacity: 0.4; }
+    6% { opacity: 1; }
+    7% { opacity: 0.4; }
+    8% { opacity: 1; }
+    9% { opacity: 0.4; }
+    10% { opacity: 1; }
+    100% { opacity: 1; }
+}
+
+@keyframes terminalScanline {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(100%);
+        opacity: 0.7;
+    }
+}
+
+@keyframes terminalNoise {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-1px, -1px); }
+    20% { transform: translate(1px, 1px); }
+    30% { transform: translate(-1px, 1px); }
+    40% { transform: translate(1px, -1px); }
+    50% { transform: translate(-1px, -1px); }
+    60% { transform: translate(1px, 1px); }
+    70% { transform: translate(-1px, 1px); }
+    80% { transform: translate(1px, -1px); }
+    90% { transform: translate(-1px, -1px); }
+}
+
+/* Page transition effect */
+@keyframes pageTransition {
+    0% {
+        opacity: 0;
+        transform: scale(0.98) translateY(10px);
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.bio-cards,
+.project-cards {
+    animation: pageTransition 0.5s ease-out forwards;
+}
+
+/* Enhance glow effects */
+:root {
+    --term-glow: 0 0 10px rgba(0, 230, 255, 0.6);
+    --term-glow-strong: 0 0 20px rgba(0, 230, 255, 0.8);
+}
+
+/* Maintain consistent card appearance */
+@media (max-width: 768px) {
+    .profile-card {
+        transform: none !important;
+        margin: var(--space-3xl) auto var(--space-xl);
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-card {
+        transform: none !important;
+        margin: var(--space-2xl) auto var(--space-lg);
+    }
+}
+
+/* Remove noise animation from text and icons */
+.profile-card h1,
+.profile-card h2,
+.bio-card h3,
+.project-card h3,
+.profile-social-links,
+.bio-card p,
+.project-card p,
+.bio-card-icon,
+.project-card-icon,
+.profile-tag,
+.profile-tag i {
+    animation: none;
+}
+
+/* Keep the screen effects on the background */
+.profile-card::before,
+.bio-card::before,
+.project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        linear-gradient(
+            transparent 50%,
+            rgba(0, 230, 255, 0.025) 50%
+        ),
+        repeating-linear-gradient(
+            transparent 0px,
+            transparent 1px,
+            rgba(0, 230, 255, 0.05) 2px,
+            rgba(0, 230, 255, 0.05) 3px
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(0, 230, 255, 0.05) 0%,
+            transparent 100%
+        );
+    background-size: 100% 4px, 100% 4px, 100% 100%;
+    pointer-events: none;
+    animation: 
+        terminalScanline 8s linear infinite,
+        terminalNoise 0.5s steps(5) infinite;
+    opacity: 0.5;
+    z-index: 0;
+    mix-blend-mode: screen;
+}
+
+/* Override any transition effects for header text */
+.profile-card header,
+.profile-card header * {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+/* Adjust spacing for mobile */
+@media (max-width: 768px) {
+    .project-cards,
+    .bio-cards {
+        gap: var(--space-xl);
+        margin: var(--space-xl) auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-cards,
+    .bio-cards {
+        gap: var(--space-lg);
+        margin: var(--space-lg) auto;
+    }
+}
+
+/* Maintain larger gaps between subsequent cards */
+.project-card:not(:first-child),
+.bio-card:not(:first-child) {
+    margin-top: var(--space-2xl);
+}
+
+@media (max-width: 768px) {
+    .profile-card {
+        margin: var(--space-lg) auto var(--space-md);
+    }
+    
+    .project-cards,
+    .bio-cards {
+        margin: var(--space-md) auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-card {
+        margin: var(--space-md) auto var(--space-sm);
+    }
+    
+    .project-cards,
+    .bio-cards {
+        margin: var(--space-sm) auto;
+    }
+}
+
+/* Maintain smaller gaps between subsequent cards */
+.project-card:not(:first-child),
+.bio-card:not(:first-child) {
+    margin-top: var(--space-lg);
+}
+
+@media (max-width: 768px) {
+    .profile-card {
+        margin: var(--space-md) auto var(--space-sm);
+    }
+    
+    .project-cards,
+    .bio-cards {
+        gap: var(--space-lg);
+        margin: var(--space-sm) auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-card {
+        margin: var(--space-sm) auto var(--space-xs);
+    }
+    
+    .project-cards,
+    .bio-cards {
+        gap: var(--space-md);
+        margin: var(--space-xs) auto;
+    }
+}
+
+/* Maintain consistent spacing between cards */
+.project-card:not(:first-child),
+.bio-card:not(:first-child) {
+    margin-top: var(--space-md);
+}
+
+/* Desktop specific spacing */
+@media (min-width: 769px) {
+    .project-cards,
+    .bio-cards {
+        gap: var(--space-md);
+        margin: var(--space-sm) auto;
+    }
+
+    .project-card:not(:first-child),
+    .bio-card:not(:first-child) {
+        margin-top: var(--space-md);
+    }
+
+    .profile-card {
+        margin: 0 auto var(--space-sm);
+    }
+}
+
+/* Tablet adjustments */
+@media (max-width: 768px) {
+    .project-cards,
+    .bio-cards {
+        gap: var(--space-md);
+        margin: var(--space-sm) auto;
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+    .project-cards,
+    .bio-cards {
+        gap: var(--space-sm);
+        margin: var(--space-xs) auto;
+    }
+}
+
+/* Remove all margin-top from cards */
+.project-card,
+.bio-card {
+    margin-top: 0 !important;
+}
+
+/* Desktop specific spacing */
+@media (min-width: 769px) {
+    .content-container {
+        gap: var(--space-md);
+        padding-top: var(--space-md);
+    }
+
+    .project-cards,
+    .bio-cards {
+        gap: var(--space-sm);
+    }
+}
+
+/* Tablet adjustments */
+@media (max-width: 768px) {
+    .content-container {
+        gap: var(--space-sm);
+        padding-top: var(--space-sm);
+    }
+
+    .project-cards,
+    .bio-cards {
+        gap: var(--space-sm);
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+    .content-container {
+        gap: var(--space-xs);
+        padding-top: var(--space-xs);
+    }
+
+    .project-cards,
+    .bio-cards {
+        gap: var(--space-xs);
+    }
+}
+
+/* Remove redundant spacing rules */
+.project-card:not(:first-child),
+.bio-card:not(:first-child) {
+    margin-top: 0;
+}
+
+/* Project Cards */
+.project-cards,
+.bio-cards {
+    width: 100%;
+    max-width: min(85vw, 280px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Remove all individual card margins */
+.project-card,
+.bio-card {
+    margin: 0;
+    padding: var(--space-md);
+}
+
+.profile-card {
+    margin-bottom: var(--space-xl);
+    padding: var(--space-md);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .content-container {
+        gap: var(--space-lg);
+        padding-top: var(--space-lg);
+    }
+
+    .project-cards,
+    .bio-cards {
+        gap: var(--space-lg);
+    }
+
+    .profile-card {
+        margin-bottom: var(--space-lg);
+    }
+}
+
+@media (max-width: 480px) {
+    .content-container {
+        gap: var(--space-md);
+        padding-top: var(--space-md);
+    }
+
+    .project-cards,
+    .bio-cards {
+        gap: var(--space-md);
+    }
+
+    .profile-card {
+        margin-bottom: var(--space-md);
+    }
+}
+
+/* Remove any conflicting spacing rules */
+.project-card:not(:first-child),
+.bio-card:not(:first-child) {
+    margin-top: 0;
 }
