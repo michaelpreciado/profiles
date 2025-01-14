@@ -84,6 +84,77 @@ particlesJS("particles-js", {
   "retina_detect": true
 });
 
+// Unified typing effect function
+function typeText(element, text, speed = 5) {
+    return new Promise(resolve => {
+        if (!element || !text) {
+            resolve();
+            return;
+        }
+        let index = 0;
+        element.textContent = '';
+        element.style.visibility = 'visible';
+        
+        function type() {
+            if (index < text.length) {
+                element.textContent += text.charAt(index);
+                index++;
+                setTimeout(type, speed);
+            } else {
+                resolve();
+            }
+        }
+        type();
+    });
+}
+
+// Unified function to initialize all typing animations
+async function initializeTypingEffects() {
+    // Collect all elements that need typing effect
+    const elementsToType = [
+        // Profile section
+        { element: document.querySelector('.profile-card h1'), text: 'Michael Preciado' },
+        { element: document.querySelector('.profile-card h2'), text: 'Software & AI Solutions' },
+        { element: document.querySelector('.job-ready-description p'), 
+          text: 'Passionate about leveraging technology to solve real-world problems. Seeking opportunities to contribute to innovative projects and grow within a dynamic team.' },
+        
+        // Projects section
+        { element: document.querySelector('.projects-header h1'), text: 'Projects' },
+        ...Array.from(document.querySelectorAll('.project-card p')).map(el => ({
+            element: el,
+            text: el.textContent
+        })),
+        
+        // Bio cards
+        ...Array.from(document.querySelectorAll('.bio-card h3, .bio-card p')).map(el => ({
+            element: el,
+            text: el.textContent
+        }))
+    ];
+
+    // Clear all elements first
+    elementsToType.forEach(item => {
+        if (item.element) {
+            item.element.textContent = '';
+            item.element.style.visibility = 'visible';
+        }
+    });
+
+    // Type all elements simultaneously with very fast speed
+    await Promise.all(
+        elementsToType.map(item => typeText(item.element, item.text, 5)) // Set speed to 5ms
+    );
+
+    // After text is typed, fade in all tags immediately
+    const tags = document.querySelectorAll('.profile-tag');
+    tags.forEach(tag => {
+        tag.style.opacity = '1';
+        tag.style.transform = 'translateY(0)';
+        tag.style.transition = 'all 0.1s ease'; // Faster transition
+        tag.style.display = 'flex';
+    });
+}
+
 // Optimized animation handling with IntersectionObserver
 document.addEventListener('DOMContentLoaded', () => {
     // Lazy load images
@@ -187,49 +258,147 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Typing effect for 'Michael Preciado'
-    function typeText(element, text, speed = 100) {
-        let index = 0;
-        element.textContent = '';
-        
-        function type() {
-            if (index < text.length) {
-                element.textContent = text.substring(0, index + 1);
-                index++;
-                setTimeout(type, speed);
-            } else {
-                element.textContent = text + '_'; // Add underscore at the end
+    // Start typing effects
+    initializeTypingEffects();
+
+    // Touch interaction optimization
+    let touchStartY = 0;
+    let touchEndY = 0;
+    let lastScrollTime = 0;
+    const scrollCooldown = 500; // ms between scroll actions
+    const minSwipeDistance = 50; // minimum distance for swipe
+    
+    // Smooth scroll function
+    function smoothScroll(targetY, duration = 500) {
+        const startY = window.scrollY;
+        const difference = targetY - startY;
+        const startTime = performance.now();
+
+        function scroll(currentTime) {
+            const timeElapsed = currentTime - startTime;
+            const progress = Math.min(timeElapsed / duration, 1);
+            
+            // Easing function for smooth animation
+            const easeInOutCubic = progress => {
+                return progress < 0.5
+                    ? 4 * progress * progress * progress
+                    : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+            };
+
+            window.scrollTo({
+                top: startY + difference * easeInOutCubic(progress)
+            });
+
+            if (progress < 1) {
+                requestAnimationFrame(scroll);
+            }
+        }
+
+        requestAnimationFrame(scroll);
+    }
+
+    // Touch handlers with improved sensitivity
+    document.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    document.addEventListener('touchmove', (e) => {
+        if (!touchStartY) return;
+
+        const currentY = e.touches[0].clientY;
+        const deltaY = touchStartY - currentY;
+        const currentTime = Date.now();
+
+        // Prevent overscrolling
+        if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight && deltaY > 0) {
+            e.preventDefault();
+        }
+        if (window.scrollY <= 0 && deltaY < 0) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+
+    document.addEventListener('touchend', (e) => {
+        touchEndY = e.changedTouches[0].clientY;
+        const deltaY = touchStartY - touchEndY;
+        const currentTime = Date.now();
+
+        // Check if enough time has passed since last scroll
+        if (currentTime - lastScrollTime > scrollCooldown) {
+            if (Math.abs(deltaY) > minSwipeDistance) {
+                // Calculate scroll distance based on swipe speed
+                const speed = Math.abs(deltaY) / (currentTime - lastScrollTime);
+                const scrollDistance = Math.min(window.innerHeight * speed * 0.5, window.innerHeight);
+                
+                const targetY = window.scrollY + (deltaY > 0 ? scrollDistance : -scrollDistance);
+                smoothScroll(targetY);
+                
+                lastScrollTime = currentTime;
             }
         }
         
-        type();
+        touchStartY = 0;
+    }, { passive: true });
+
+    // Add momentum scrolling for smoother experience
+    let velocity = 0;
+    let rafId = null;
+    
+    function momentumScroll() {
+        if (Math.abs(velocity) > 0.1) {
+            window.scrollBy(0, velocity);
+            velocity *= 0.95; // Decay factor
+            rafId = requestAnimationFrame(momentumScroll);
+        } else {
+            cancelAnimationFrame(rafId);
+        }
     }
 
-    // Initialize typing effect for name
-    const nameElement = document.querySelector('.profile-card h1');
-    if (nameElement) {
-        // Set initial text to prevent flash of empty content
-        nameElement.textContent = 'Michael Preciado';
-        // Start typing effect after a short delay
-        setTimeout(() => {
-            typeText(nameElement, 'Michael Preciado', 100);
-        }, 500);
-    }
+    document.addEventListener('wheel', (e) => {
+        velocity = e.deltaY * 0.1;
+        if (!rafId) {
+            rafId = requestAnimationFrame(momentumScroll);
+        }
+    }, { passive: true });
 
-    // Start terminal animation
-    initTerminalAnimation();
+    // Optimize card interactions for touch
+    const cards = document.querySelectorAll('.project-card, .bio-card');
+    cards.forEach(card => {
+        let touchStartTime;
+        let touchStartX;
+        let touchStartY;
+        
+        card.addEventListener('touchstart', (e) => {
+            touchStartTime = Date.now();
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            
+            // Add active state
+            card.style.transform = 'scale(0.98)';
+            card.style.transition = 'transform 0.2s ease';
+        }, { passive: true });
 
-    // Apply typing effect to projects page
-    const projectTitle = document.querySelector('.projects-header h1');
-    if (projectTitle) {
-        typeText(projectTitle, 'Projects', 100);
-    }
+        card.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].clientX;
+            const touchEndY = e.changedTouches[0].clientY;
+            const touchDuration = Date.now() - touchStartTime;
+            const deltaX = Math.abs(touchEndX - touchStartX);
+            const deltaY = Math.abs(touchEndY - touchStartY);
 
-    const projectDescriptions = document.querySelectorAll('.project-card p');
-    projectDescriptions.forEach((desc, index) => {
-        setTimeout(() => {
-            typeText(desc, desc.textContent, 50);
-        }, index * 500);
+            // Remove active state
+            card.style.transform = '';
+            
+            // If it's a tap (not a scroll attempt)
+            if (touchDuration < 250 && deltaX < 10 && deltaY < 10) {
+                // Handle card tap
+                const link = card.querySelector('a');
+                if (link) link.click();
+            }
+        }, { passive: true });
+
+        card.addEventListener('touchcancel', () => {
+            card.style.transform = '';
+        }, { passive: true });
     });
 });
 

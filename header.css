@@ -2,127 +2,189 @@
 .main-header {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
+    right: 0;
+    width: auto;
     z-index: 1000;
     background: transparent;
-    border-bottom: none;
-    box-shadow: none;
+    padding: 1rem;
 }
 
 .header-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
-    padding: 1rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.logo {
-    font-family: var(--font-mono);
-    color: var(--term-cyan-bright);
-    font-size: 1.5rem;
-    font-weight: 400;
-    text-shadow: 0 0 10px var(--term-cyan);
 }
 
 .hamburger-menu {
-    background: none;
-    border: none;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--term-cyan-dark);
+    border-radius: 8px;
     color: var(--term-cyan);
     font-size: 1.2rem;
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 0.8rem;
     transition: all 0.3s ease;
+    box-shadow: var(--term-glow);
+    position: relative;
+    z-index: 1000;
 }
 
 .hamburger-menu:hover {
     color: var(--term-cyan-bright);
     text-shadow: 0 0 8px var(--term-cyan);
+    transform: translateX(-2px);
+    box-shadow: 0 0 15px var(--term-cyan);
 }
 
-/* Sidebar Styles */
+/* Sidebar/Contact Card Styles */
 .sidebar {
     position: fixed;
-    top: 0;
-    right: -280px;
-    width: 280px;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.95);
-    border-left: 2px solid var(--term-cyan-dark);
-    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1000;
-    box-shadow: -5px 0 15px rgba(0, 230, 230, 0.1);
+    top: 80px;
+    right: 20px;
+    transform: scale(0);
+    width: 300px;
+    background: rgba(0, 18, 21, 0.7);
+    border: 2px solid var(--term-cyan-dark);
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999;
+    box-shadow: var(--term-glow);
+    padding: 1.5rem;
+    transform-origin: top right;
+    opacity: 0;
+    backdrop-filter: blur(10px);
 }
 
 .sidebar.active {
-    right: 0;
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 0 20px var(--term-cyan);
+}
+
+.sidebar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        transparent 50%,
+        rgba(0, 230, 255, 0.025) 50%
+    ),
+    repeating-linear-gradient(
+        transparent 0px,
+        transparent 1px,
+        rgba(0, 230, 255, 0.05) 2px,
+        rgba(0, 230, 255, 0.05) 3px
+    );
+    background-size: 100% 4px, 100% 4px;
+    pointer-events: none;
+    animation: scanline 8s linear infinite;
+    opacity: 0.3;
+    border-radius: 12px;
+    z-index: -1;
 }
 
 .sidebar-content {
-    padding: var(--space-md);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
+    position: relative;
 }
 
 .close-sidebar {
     position: absolute;
-    top: var(--space-sm);
-    right: var(--space-sm);
-    background: transparent;
-    border: none;
+    top: -1rem;
+    right: -1rem;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--term-cyan-dark);
+    border-radius: 50%;
     color: var(--term-cyan);
-    font-size: var(--font-size-lg);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    padding: var(--space-xs);
     transition: all 0.3s ease;
 }
 
 .close-sidebar:hover {
     color: var(--term-cyan-bright);
     transform: scale(1.1);
+    box-shadow: 0 0 10px var(--term-cyan);
 }
 
 .contact-section {
-    margin-top: var(--space-xl);
-    padding-left: var(--space-sm);
+    text-align: center;
 }
 
 .contact-section h2 {
-    font-size: var(--font-size-lg);
-    color: var(--term-cyan-bright);
-    margin: 0 0 var(--space-md);
+    font-size: 1.5rem;
+    color: #FFFFFF;
+    margin: 0 0 1.5rem;
     text-shadow: var(--term-glow);
     border-bottom: 1px solid var(--term-cyan-dark);
-    padding-bottom: var(--space-xs);
+    padding-bottom: 0.5rem;
+    position: relative;
+}
+
+.contact-section h2::after {
+    content: '_';
+    display: inline-block;
+    color: var(--term-cyan-bright);
+    animation: blink 1s step-end infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
 }
 
 .contact-info {
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .contact-item {
     display: flex;
     align-items: center;
-    gap: var(--space-md);
+    gap: 0.8rem;
     color: var(--term-cyan);
     text-decoration: none;
-    font-size: var(--font-size-sm);
-    padding: var(--space-xs);
-    border-radius: 4px;
+    font-size: 0.9rem;
+    padding: 0.8rem;
+    border-radius: 8px;
+    background: rgba(0, 230, 230, 0.05);
+    border: 1px solid var(--term-cyan-dark);
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 230, 230, 0.2),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.contact-item:hover::before {
+    left: 100%;
 }
 
 .contact-item i {
-    font-size: var(--font-size-md);
+    font-size: 1.2rem;
     color: var(--term-cyan-bright);
     text-shadow: var(--term-glow);
-    min-width: 20px; /* Fixed width for icons */
+    min-width: 20px;
     text-align: center;
 }
 
@@ -130,30 +192,31 @@
     background: rgba(0, 230, 230, 0.1);
     color: var(--term-cyan-bright);
     transform: translateX(4px);
+    box-shadow: 0 0 10px var(--term-cyan);
 }
 
 .location-info {
-    margin-top: var(--space-md);
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--term-cyan-dark);
 }
 
 .location-info p {
     display: flex;
     align-items: center;
-    gap: var(--space-md);
+    justify-content: center;
+    gap: 0.5rem;
     color: var(--term-cyan-dim);
-    font-size: var(--font-size-sm);
+    font-size: 0.9rem;
     margin: 0;
-    padding-left: var(--space-xs);
 }
 
 .location-info i {
     color: var(--term-cyan-bright);
     text-shadow: var(--term-glow);
-    min-width: 20px; /* Fixed width for icons */
-    text-align: center;
 }
 
-/* Scanline effect for sidebar */
+/* Scanline effect */
 .sidebar::before {
     content: '';
     position: absolute;
@@ -166,95 +229,14 @@
     pointer-events: none;
     animation: scanline 8s linear infinite;
     opacity: 0.2;
+    border-radius: 12px;
 }
 
 /* Mobile adjustments */
 @media (max-width: 480px) {
     .sidebar {
-        width: 240px;
-        right: -240px;
-    }
-
-    .sidebar-content {
-        padding: var(--space-sm);
-    }
-
-    .contact-section h2 {
-        font-size: var(--font-size-md);
-    }
-
-    .contact-item {
-        font-size: var(--font-size-xs);
-    }
-
-    .location-info p {
-        font-size: var(--font-size-xs);
-    }
-
-    .contact-section {
-        padding-left: var(--space-xs);
-    }
-
-    .contact-item {
-        gap: var(--space-sm);
-    }
-
-    .location-info p {
-        gap: var(--space-sm);
-    }
-}
-
-/* Mobile Styles */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 85%;
-        max-width: 300px;
-        right: -85%;
-        top: 60px;
-        height: auto;
-        max-height: calc(100vh - 60px);
-        border-bottom-left-radius: 8px;
-        border-left: 2px solid var(--term-cyan-dark);
-        border-bottom: 2px solid var(--term-cyan-dark);
-    }
-    
-    .sidebar.active {
-        right: 0;
-    }
-    
-    .sidebar-content {
-        padding: 1.5rem;
-        max-height: calc(100vh - 60px);
-        overflow-y: auto;
-    }
-    
-    .contact-info {
-        margin-top: 1rem;
-    }
-    
-    .contact-item {
-        margin-bottom: 1.2rem;
-    }
-    
-    .location-info {
-        position: relative;
-        bottom: auto;
-        left: auto;
-        right: auto;
-        margin-top: 1.5rem;
-        padding-top: 1rem;
-    }
-    
-    .main-header.sidebar-active {
-        right: 0;
-    }
-    
-    .header-content {
-        padding: 0.8rem 1rem;
-    }
-    
-    .close-sidebar {
-        top: 0.8rem;
-        right: 0.8rem;
+        width: 280px;
+        right: 10px;
+        top: 70px;
     }
 } 

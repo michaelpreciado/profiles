@@ -1,8 +1,8 @@
 /* Projects Container */
 .projects-container {
-    max-width: 320px;
+    max-width: 280px;
     margin: 0 auto;
-    padding: 6rem 1rem 2rem;
+    padding: 6rem 2rem 2rem;
     position: relative;
     z-index: 10;
     min-height: 100vh;
@@ -68,9 +68,33 @@
     position: relative;
 }
 
-/* Project Card */
+/* Project Cards */
+.project-cards {
+    width: 100%;
+    max-width: min(95vw, 280px);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    margin: var(--space-md) auto;
+    padding: 1rem;
+    position: relative;
+}
+
+@media (min-width: 768px) {
+    .projects-container {
+        max-width: 800px;
+    }
+    
+    .project-cards {
+        max-width: min(90vw, 700px);
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        padding: 2rem;
+    }
+}
+
 .project-card {
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 18, 21, 0.7);
     border: 2px solid var(--term-cyan-dark);
     border-radius: 8px;
     overflow: hidden;
@@ -78,57 +102,44 @@
     position: relative;
     transform-style: preserve-3d;
     box-shadow: var(--term-glow);
-    opacity: 0;
-    animation: cardFadeIn 0.6s ease-out forwards;
-    animation-delay: calc(var(--card-index, 0) * 0.2s);
+    animation: fadeInUp 0.3s ease-out forwards;
     width: 100%;
+    max-width: 260px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    max-width: 320px;
-    margin: 0 auto;
-    min-height: 260px;
+    min-height: 130px;
 }
 
-@keyframes cardFadeIn {
-    from {
-        opacity: 0;
-        transform: perspective(1000px) rotateX(5deg) translateY(50px);
-    }
-    to {
-        opacity: 1;
-        transform: perspective(1000px) rotateX(5deg) translateY(0);
-    }
+.project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        transparent 50%,
+        rgba(0, 230, 255, 0.025) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    animation: scanline 8s linear infinite;
+    opacity: 0.2;
+    border-radius: 12px;
 }
+
+.project-card:nth-child(1) { animation-delay: 0.05s !important; }
+.project-card:nth-child(2) { animation-delay: 0.1s !important; }
+.project-card:nth-child(3) { animation-delay: 0.15s !important; }
+.project-card:nth-child(4) { animation-delay: 0.2s !important; }
+.project-card:nth-child(5) { animation-delay: 0.25s !important; }
 
 .project-card:hover {
     transform: perspective(1000px) rotateX(5deg) translateY(-10px);
     box-shadow: 0 0 20px var(--term-cyan);
 }
 
-.project-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg,
-        transparent 0%,
-        var(--term-overlay) 45%,
-        var(--term-overlay) 55%,
-        transparent 100%);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.project-card:hover::before {
-    opacity: 1;
-}
-
 .project-image {
     width: 100%;
-    height: 200px;
+    height: 100px;
     overflow: hidden;
     border-bottom: 1px solid var(--term-cyan-dark);
     position: relative;
@@ -153,7 +164,7 @@
 }
 
 .project-info {
-    padding: 0.8rem 1rem;
+    padding: 0.4rem 0.5rem;
     position: relative;
     z-index: 2;
     flex: 1;
@@ -165,32 +176,32 @@
 }
 
 .project-info h2 {
-    font-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem);
-    line-height: var(--line-height-tight);
+    font-size: clamp(0.8rem, 0.75rem + 0.25vw, 0.9rem);
+    line-height: 1.2;
     margin-bottom: var(--space-xs);
     color: var(--term-cyan-bright);
 }
 
 .project-info p {
-    font-size: clamp(0.7rem, 0.65rem + 0.5vw, 0.8rem);
-    line-height: 1.3;
-    margin-bottom: 0.3rem;
+    font-size: clamp(0.6rem, 0.55rem + 0.25vw, 0.7rem);
+    line-height: 1.2;
+    margin-bottom: 0.2rem;
     color: var(--term-cyan-dim);
 }
 
 .project-links {
     display: flex;
-    gap: 0.4rem;
-    margin-top: 0.4rem;
+    gap: 0.3rem;
+    margin-top: 0.3rem;
 }
 
 .project-links a {
-    font-size: clamp(0.7rem, 0.65rem + 0.5vw, 0.8rem);
-    padding: 0.8rem;
-    gap: 0.3rem;
+    font-size: clamp(0.6rem, 0.55rem + 0.25vw, 0.7rem);
+    padding: 0.4rem;
+    gap: 0.2rem;
     color: var(--term-cyan);
     text-decoration: none;
-    min-height: 44px;
+    min-height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -416,20 +427,97 @@
 
 /* Terminal Text Animation */
 .terminal-text {
-    visibility: hidden;
-    opacity: 0;
-    position: relative;
-    animation: textFlicker 0.01s infinite;
-    text-shadow: 
-        0 0 5px var(--term-cyan-bright),
-        0 0 10px var(--term-cyan);
+    visibility: visible !important;
+    opacity: 1 !important;
+    animation: none !important;
 }
 
 .terminal-text.typing {
-    visibility: visible;
-    opacity: 1;
-    animation: 
-        terminalFadeIn 0.3s ease forwards,
-        textFlicker 0.01s infinite,
-        textDistortion 6s infinite;
+    visibility: visible !important;
+    opacity: 1 !important;
+    animation: none !important;
+}
+
+/* Override profile card animations */
+.profile-card {
+    animation: fadeInUp 0.3s ease-out forwards !important;
+}
+
+.profile-tag {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* Faster fade in animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Remove delays from bio cards */
+.bio-card {
+    animation-delay: 0s !important;
+}
+
+/* Ensure text is immediately visible */
+.profile-card h1,
+.profile-card h2,
+.project-card h3,
+.project-card p {
+    visibility: visible !important;
+    opacity: 1 !important;
+    animation: none !important;
+}
+
+/* Profile Card Name Animation */
+.profile-card h1 {
+    position: relative;
+    animation: fadeIn 0.3s ease-out forwards !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #FFFFFF !important;
+}
+
+.profile-card h1::after {
+    content: '_';
+    display: inline-block;
+    color: #FFFFFF;
+    animation: blink 1s step-end infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Override any conflicting animations */
+.profile-card h1,
+.profile-card h1::before,
+.profile-card h1::after {
+    animation-delay: 0s !important;
+    transform: none !important;
+    clip: auto !important;
+    text-shadow: none !important;
+}
+
+.profile-card h1::before,
+.profile-card h1::after {
+    background: none !important;
 } 
