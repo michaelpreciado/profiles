@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
         animationObserver.observe(el);
     });
 
-    // Debounced scroll handler for performance
+    // Simplified scroll handler for particles only
     let scrollTimeout;
     const scrollHandler = () => {
         if (scrollTimeout) {
@@ -204,110 +204,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const scrolled = window.scrollY;
             const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
             const opacity = Math.max(0.2, 1 - (scrolled / maxScroll));
-            document.getElementById('particles-js').style.opacity = opacity;
+            const particles = document.getElementById('particles-js');
+            if (particles) {
+                particles.style.opacity = opacity;
+            }
         });
     };
 
     window.addEventListener('scroll', scrollHandler, { passive: true });
 
-    // Touch-friendly navigation
-    const handleTouchStart = (e) => {
-        const touch = e.touches[0];
-        window.touchStartY = touch.clientY;
-    };
-
-    const handleTouchMove = (e) => {
-        if (!window.touchStartY) return;
-        
-        const touch = e.touches[0];
-        const deltaY = window.touchStartY - touch.clientY;
-        
-        if (Math.abs(deltaY) > 30) {
-            window.requestAnimationFrame(() => {
-                window.scrollBy({
-                    top: deltaY,
-                    behavior: 'smooth'
-                });
-            });
-        }
-    };
-
-    document.addEventListener('touchstart', handleTouchStart, { passive: true });
-    document.addEventListener('touchmove', handleTouchMove, { passive: true });
-    document.addEventListener('touchend', () => {
-        window.touchStartY = null;
-    }, { passive: true });
-
-    // Responsive hover effects
-    if (window.matchMedia('(hover: hover)').matches) {
-        const cards = document.querySelectorAll('.profile-card, .bio-card, .project-card');
-        cards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                requestAnimationFrame(() => {
-                    card.style.transform = 'translateY(-4px)';
-                    card.style.boxShadow = 'var(--term-glow-strong)';
-                });
-            });
-
-            card.addEventListener('mouseleave', () => {
-                requestAnimationFrame(() => {
-                    card.style.transform = '';
-                    card.style.boxShadow = '';
-                });
-            });
-        });
-    }
-
-    // Start typing effects
-    initializeTypingEffects();
-
-    // Simplified touch interaction optimization for iOS
-    let touchStartY = 0;
-    let isTouching = false;
-    
-    document.addEventListener('touchstart', (e) => {
-        touchStartY = e.touches[0].clientY;
-        isTouching = true;
-    }, { passive: true });
-
-    document.addEventListener('touchend', () => {
-        isTouching = false;
-    }, { passive: true });
-
-    // Remove custom scroll behavior and momentum scrolling
-    // Let iOS handle native scrolling
-    document.addEventListener('touchmove', (e) => {
-        if (!isTouching) return;
-        // Only prevent default for extreme overscroll cases
-        const currentY = e.touches[0].clientY;
-        if ((window.scrollY <= 0 && currentY > touchStartY) || 
-            (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight && currentY < touchStartY)) {
-            e.preventDefault();
-        }
-    }, { passive: false });
-
-    // Remove momentum scrolling and custom scroll handlers
-    // let velocity = 0;
-    // let rafId = null;
-    
-    // function momentumScroll() {
-    //     if (Math.abs(velocity) > 0.1) {
-    //         window.scrollBy(0, velocity);
-    //         velocity *= 0.95;
-    //         rafId = requestAnimationFrame(momentumScroll);
-    //     } else {
-    //         cancelAnimationFrame(rafId);
-    //     }
-    // }
-
-    // document.addEventListener('wheel', (e) => {
-    //     velocity = e.deltaY * 0.1;
-    //     if (!rafId) {
-    //         rafId = requestAnimationFrame(momentumScroll);
-    //     }
-    // }, { passive: true });
-
-    // Optimize card touch interactions
+    // Simplified card touch interactions - only for tap detection
     const cards = document.querySelectorAll('.project-card, .bio-card');
     cards.forEach(card => {
         let touchStartTime;
@@ -319,9 +225,9 @@ document.addEventListener('DOMContentLoaded', () => {
             touchStartX = e.touches[0].clientX;
             touchStartY = e.touches[0].clientY;
             
-            // Subtle scale effect on touch
-            card.style.transform = 'scale(0.99)';
-            card.style.transition = 'transform 0.2s ease';
+            // Very subtle scale effect
+            card.style.transform = 'scale(0.995)';
+            card.style.transition = 'transform 0.1s ease';
         }, { passive: true });
 
         card.addEventListener('touchend', (e) => {
@@ -335,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.transform = '';
             
             // Only trigger tap if it's a quick, small movement
-            if (touchDuration < 200 && deltaX < 5 && deltaY < 5) {
+            if (touchDuration < 150 && deltaX < 10 && deltaY < 10) {
                 const link = card.querySelector('a');
                 if (link) link.click();
             }
@@ -345,6 +251,9 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.transform = '';
         }, { passive: true });
     });
+
+    // Start typing effects
+    initializeTypingEffects();
 });
 
 // Handle reduced motion preference

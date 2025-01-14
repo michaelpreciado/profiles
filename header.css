@@ -6,7 +6,7 @@
     width: auto;
     z-index: 1000;
     background: transparent;
-    padding: 1rem;
+    padding: 1rem 2rem;
 }
 
 .header-content {
@@ -27,6 +27,8 @@
     box-shadow: var(--term-glow);
     position: relative;
     z-index: 1000;
+    margin-right: 1rem;
+    backdrop-filter: blur(10px);
 }
 
 .hamburger-menu:hover {
@@ -34,13 +36,20 @@
     text-shadow: 0 0 8px var(--term-cyan);
     transform: translateX(-2px);
     box-shadow: 0 0 15px var(--term-cyan);
+    background: rgba(0, 18, 21, 0.9);
+}
+
+.hamburger-menu i {
+    font-size: 1.4rem;
+    color: var(--term-cyan-bright);
+    text-shadow: var(--term-glow);
 }
 
 /* Sidebar/Contact Card Styles */
 .sidebar {
     position: fixed;
     top: 80px;
-    right: 20px;
+    right: 40px;
     transform: scale(0);
     width: 300px;
     background: rgba(0, 18, 21, 0.7);
@@ -236,7 +245,15 @@
 @media (max-width: 480px) {
     .sidebar {
         width: 280px;
-        right: 10px;
+        right: 20px;
         top: 70px;
+    }
+    
+    .main-header {
+        padding: 1rem;
+    }
+    
+    .hamburger-menu {
+        margin-right: 0;
     }
 } 

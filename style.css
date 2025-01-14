@@ -460,39 +460,42 @@ body {
     }
 
     .profile-card header {
-        padding: var(--space-md) var(--space-md) var(--space-md) var(--space-2xl);
-        min-height: 130px;
+        padding: var(--space-sm) var(--space-sm) var(--space-sm) var(--space-lg);
+        min-height: 110px;
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     .profile-image {
-        width: 80px;
-        height: 80px;
+        width: 90px;
+        height: 90px;
         position: relative;
-        margin-right: var(--space-md);
+        margin-right: var(--space-sm);
     }
 
     .profile-header-text {
         padding: 0;
-        padding-top: 0;
-        width: auto;
-        text-align: left;
-        margin-top: 0;
+        margin: 0;
     }
 
     .profile-card h1 {
-        font-size: calc(var(--font-size-2xl) * 1.5);
+        font-size: calc(var(--font-size-2xl) * 2.5);
         text-align: left;
-        margin-bottom: var(--space-2xs);
-        line-height: 1;
+        margin-bottom: 0;
+        line-height: 0.85;
     }
 
     .profile-card h2 {
         text-align: left;
-        margin-top: -2px;
+        margin-top: 0;
+        font-size: var(--font-size-sm);
+    }
+
+    .profile-tags {
+        margin-top: var(--space-2xs);
+        gap: calc(var(--space-2xs) * 0.8);
     }
 
     .profile-social-links {
@@ -530,12 +533,13 @@ body {
     }
 
     .profile-card {
-        transform: scale(1.1);
+        transform: scale(1.15);
         margin: var(--space-lg) auto var(--space-md);
     }
 
     .profile-card h1 {
-        font-size: calc(var(--font-size-2xl) * 1.4);
+        font-size: calc(var(--font-size-2xl) * 2.2);
+        line-height: 0.9;
     }
 
     .profile-card h2 {
@@ -543,9 +547,9 @@ body {
     }
 
     .profile-image {
-        width: 100px;
-        height: 100px;
-        margin-right: var(--space-md);
+        width: 80px;
+        height: 80px;
+        margin-right: var(--space-xs);
     }
 
     .profile-header-text {
@@ -553,8 +557,8 @@ body {
     }
 
     .profile-card header {
-        padding: var(--space-sm) var(--space-sm) var(--space-sm) var(--space-xl);
-        min-height: 110px;
+        padding: var(--space-xs) var(--space-xs) var(--space-xs) var(--space-md);
+        min-height: 100px;
     }
 
     .bio-card-icon {
@@ -567,8 +571,7 @@ body {
     }
 
     .profile-tags {
-        gap: var(--space-xs);
-        margin-top: var(--space-xs);
+        gap: calc(var(--space-2xs) * 0.6);
     }
 
     .profile-tag {
@@ -594,9 +597,9 @@ body {
     }
 
     .profile-image {
-        width: 60px;
-        height: 60px;
-        margin-right: var(--space-xs);
+        width: 70px;
+        height: 70px;
+        margin-right: var(--space-2xs);
     }
 
     .profile-header-text {
@@ -604,8 +607,13 @@ body {
     }
 
     .profile-card header {
-        padding: var(--space-xs) var(--space-xs) var(--space-xs) var(--space-lg);
-        min-height: 100px;
+        padding: var(--space-2xs) var(--space-2xs) var(--space-2xs) var(--space-sm);
+        min-height: 90px;
+    }
+
+    .profile-card h1 {
+        font-size: calc(var(--font-size-2xl) * 2);
+        line-height: 0.9;
     }
 }
 
@@ -985,7 +993,7 @@ body {
 /* Hover effect for tags */
 @media (hover: hover) {
     .profile-tag:hover {
-        background: rgba(0, 230, 230, 0.1);
+        background: rgba(0, 230, 255, 0.1);
         border-color: var(--term-cyan-bright);
         transform: translateY(-1px);
         transition: all 0.3s ease;
@@ -1396,6 +1404,8 @@ body {
     color: #FFFFFF;
     text-shadow: var(--term-glow);
     line-height: 1.1;
+    animation: nameLoadIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     
     @media (min-width: 768px) {
         font-size: calc(var(--font-size-2xl) * 1.2);
@@ -1408,6 +1418,8 @@ body {
     color: var(--term-cyan-dim);
     margin: 0;
     line-height: 1.2;
+    animation: nameLoadIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+    opacity: 0;
     
     @media (min-width: 768px) {
         font-size: var(--font-size-sm);
@@ -1422,6 +1434,8 @@ body {
     gap: calc(var(--space-2xs) * 0.4);
     margin-top: calc(var(--space-2xs) * 0.6);
     width: 100%;
+    animation: nameLoadIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
+    opacity: 0;
 }
 
 .profile-tag {
@@ -1438,6 +1452,7 @@ body {
     white-space: nowrap;
     transform-origin: left center;
     transition: all var(--transition-fast);
+    animation: nameLoadIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .profile-tag i {
@@ -1810,4 +1825,18 @@ body {
 .contact-icon:hover {
     background: var(--term-cyan);
     transform: scale(1.1);
+}
+
+@keyframes nameLoadIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
