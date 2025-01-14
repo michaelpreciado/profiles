@@ -5,9 +5,9 @@
     left: 0;
     width: 100%;
     z-index: 1000;
-    background: #000000;
-    border-bottom: 1px solid var(--term-cyan-dark);
-    box-shadow: 0 2px 10px rgba(0, 230, 230, 0.1);
+    background: transparent;
+    border-bottom: none;
+    box-shadow: none;
 }
 
 .header-content {

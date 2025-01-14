@@ -191,26 +191,46 @@ document.addEventListener('DOMContentLoaded', () => {
     function typeText(element, text, speed = 100) {
         let index = 0;
         element.textContent = '';
-        const type = () => {
+        
+        function type() {
             if (index < text.length) {
-                element.textContent += text.charAt(index);
+                element.textContent = text.substring(0, index + 1);
                 index++;
                 setTimeout(type, speed);
             } else {
-                element.textContent += '_'; // Add underscore at the end
+                element.textContent = text + '_'; // Add underscore at the end
             }
-        };
+        }
+        
         type();
     }
 
-    // Corrected spelling for 'Michael Preciado'
+    // Initialize typing effect for name
     const nameElement = document.querySelector('.profile-card h1');
     if (nameElement) {
-        typeText(nameElement, 'Michael Preciado', 100);
+        // Set initial text to prevent flash of empty content
+        nameElement.textContent = 'Michael Preciado';
+        // Start typing effect after a short delay
+        setTimeout(() => {
+            typeText(nameElement, 'Michael Preciado', 100);
+        }, 500);
     }
 
     // Start terminal animation
     initTerminalAnimation();
+
+    // Apply typing effect to projects page
+    const projectTitle = document.querySelector('.projects-header h1');
+    if (projectTitle) {
+        typeText(projectTitle, 'Projects', 100);
+    }
+
+    const projectDescriptions = document.querySelectorAll('.project-card p');
+    projectDescriptions.forEach((desc, index) => {
+        setTimeout(() => {
+            typeText(desc, desc.textContent, 50);
+        }, index * 500);
+    });
 });
 
 // Handle reduced motion preference

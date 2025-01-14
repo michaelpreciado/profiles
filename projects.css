@@ -412,4 +412,24 @@
     .project-card::before {
         animation: none !important;
     }
+}
+
+/* Terminal Text Animation */
+.terminal-text {
+    visibility: hidden;
+    opacity: 0;
+    position: relative;
+    animation: textFlicker 0.01s infinite;
+    text-shadow: 
+        0 0 5px var(--term-cyan-bright),
+        0 0 10px var(--term-cyan);
+}
+
+.terminal-text.typing {
+    visibility: visible;
+    opacity: 1;
+    animation: 
+        terminalFadeIn 0.3s ease forwards,
+        textFlicker 0.01s infinite,
+        textDistortion 6s infinite;
 } 
