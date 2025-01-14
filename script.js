@@ -261,107 +261,53 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start typing effects
     initializeTypingEffects();
 
-    // Touch interaction optimization
+    // Simplified touch interaction optimization for iOS
     let touchStartY = 0;
-    let touchEndY = 0;
-    let lastScrollTime = 0;
-    const scrollCooldown = 500; // ms between scroll actions
-    const minSwipeDistance = 50; // minimum distance for swipe
+    let isTouching = false;
     
-    // Smooth scroll function
-    function smoothScroll(targetY, duration = 500) {
-        const startY = window.scrollY;
-        const difference = targetY - startY;
-        const startTime = performance.now();
-
-        function scroll(currentTime) {
-            const timeElapsed = currentTime - startTime;
-            const progress = Math.min(timeElapsed / duration, 1);
-            
-            // Easing function for smooth animation
-            const easeInOutCubic = progress => {
-                return progress < 0.5
-                    ? 4 * progress * progress * progress
-                    : 1 - Math.pow(-2 * progress + 2, 3) / 2;
-            };
-
-            window.scrollTo({
-                top: startY + difference * easeInOutCubic(progress)
-            });
-
-            if (progress < 1) {
-                requestAnimationFrame(scroll);
-            }
-        }
-
-        requestAnimationFrame(scroll);
-    }
-
-    // Touch handlers with improved sensitivity
     document.addEventListener('touchstart', (e) => {
         touchStartY = e.touches[0].clientY;
+        isTouching = true;
     }, { passive: true });
 
+    document.addEventListener('touchend', () => {
+        isTouching = false;
+    }, { passive: true });
+
+    // Remove custom scroll behavior and momentum scrolling
+    // Let iOS handle native scrolling
     document.addEventListener('touchmove', (e) => {
-        if (!touchStartY) return;
-
+        if (!isTouching) return;
+        // Only prevent default for extreme overscroll cases
         const currentY = e.touches[0].clientY;
-        const deltaY = touchStartY - currentY;
-        const currentTime = Date.now();
-
-        // Prevent overscrolling
-        if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight && deltaY > 0) {
-            e.preventDefault();
-        }
-        if (window.scrollY <= 0 && deltaY < 0) {
+        if ((window.scrollY <= 0 && currentY > touchStartY) || 
+            (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight && currentY < touchStartY)) {
             e.preventDefault();
         }
     }, { passive: false });
 
-    document.addEventListener('touchend', (e) => {
-        touchEndY = e.changedTouches[0].clientY;
-        const deltaY = touchStartY - touchEndY;
-        const currentTime = Date.now();
-
-        // Check if enough time has passed since last scroll
-        if (currentTime - lastScrollTime > scrollCooldown) {
-            if (Math.abs(deltaY) > minSwipeDistance) {
-                // Calculate scroll distance based on swipe speed
-                const speed = Math.abs(deltaY) / (currentTime - lastScrollTime);
-                const scrollDistance = Math.min(window.innerHeight * speed * 0.5, window.innerHeight);
-                
-                const targetY = window.scrollY + (deltaY > 0 ? scrollDistance : -scrollDistance);
-                smoothScroll(targetY);
-                
-                lastScrollTime = currentTime;
-            }
-        }
-        
-        touchStartY = 0;
-    }, { passive: true });
-
-    // Add momentum scrolling for smoother experience
-    let velocity = 0;
-    let rafId = null;
+    // Remove momentum scrolling and custom scroll handlers
+    // let velocity = 0;
+    // let rafId = null;
     
-    function momentumScroll() {
-        if (Math.abs(velocity) > 0.1) {
-            window.scrollBy(0, velocity);
-            velocity *= 0.95; // Decay factor
-            rafId = requestAnimationFrame(momentumScroll);
-        } else {
-            cancelAnimationFrame(rafId);
-        }
-    }
+    // function momentumScroll() {
+    //     if (Math.abs(velocity) > 0.1) {
+    //         window.scrollBy(0, velocity);
+    //         velocity *= 0.95;
+    //         rafId = requestAnimationFrame(momentumScroll);
+    //     } else {
+    //         cancelAnimationFrame(rafId);
+    //     }
+    // }
 
-    document.addEventListener('wheel', (e) => {
-        velocity = e.deltaY * 0.1;
-        if (!rafId) {
-            rafId = requestAnimationFrame(momentumScroll);
-        }
-    }, { passive: true });
+    // document.addEventListener('wheel', (e) => {
+    //     velocity = e.deltaY * 0.1;
+    //     if (!rafId) {
+    //         rafId = requestAnimationFrame(momentumScroll);
+    //     }
+    // }, { passive: true });
 
-    // Optimize card interactions for touch
+    // Optimize card touch interactions
     const cards = document.querySelectorAll('.project-card, .bio-card');
     cards.forEach(card => {
         let touchStartTime;
@@ -373,8 +319,8 @@ document.addEventListener('DOMContentLoaded', () => {
             touchStartX = e.touches[0].clientX;
             touchStartY = e.touches[0].clientY;
             
-            // Add active state
-            card.style.transform = 'scale(0.98)';
+            // Subtle scale effect on touch
+            card.style.transform = 'scale(0.99)';
             card.style.transition = 'transform 0.2s ease';
         }, { passive: true });
 
@@ -385,12 +331,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const deltaX = Math.abs(touchEndX - touchStartX);
             const deltaY = Math.abs(touchEndY - touchStartY);
 
-            // Remove active state
+            // Remove scale effect
             card.style.transform = '';
             
-            // If it's a tap (not a scroll attempt)
-            if (touchDuration < 250 && deltaX < 10 && deltaY < 10) {
-                // Handle card tap
+            // Only trigger tap if it's a quick, small movement
+            if (touchDuration < 200 && deltaX < 5 && deltaY < 5) {
                 const link = card.querySelector('a');
                 if (link) link.click();
             }
