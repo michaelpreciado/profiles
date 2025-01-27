@@ -3,20 +3,23 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Michael Preciado Virtual Business Card</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Michael Preciado - Software Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="home.css">
 </head>
 
 <body>
     <header class="main-header">
         <div class="header-content">
             <button class="hamburger-menu" onclick="toggleSidebar()">
-                <i class="fa fa-bars"></i>
+                <i class="fas fa-address-card"></i>
+                <span>Contact</span>
             </button>
         </div>
     </header>
@@ -24,126 +27,153 @@
     <div class="sidebar" id="sidebar">
         <div class="sidebar-content">
             <button class="close-sidebar" onclick="toggleSidebar()">
-                <i class="fa fa-times"></i>
+                <i class="fas fa-times"></i>
             </button>
             <div class="contact-section">
-                <h2>Lets Connect!</h2>
+                <h2>Let's Connect!</h2>
                 <div class="contact-info">
-                    <a href="mailto:mpreciado1997@gmail.com" class="contact-item">
-                        <i class="fa fa-envelope"></i>
-                        <span>mpreciado1997@gmail.com</span>
+                    <a href="mailto:michael.preciado1995@gmail.com" class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>michael.preciado1995@gmail.com</span>
+                    </a>
+                    <a href="https://github.com/michaelpreciado" target="_blank" class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/michael-preciado/" target="_blank" class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://twitter.com/MichaelPreciad0" target="_blank" class="contact-item">
+                        <i class="fab fa-x-twitter"></i>
+                        <span>X (Twitter)</span>
                     </a>
                 </div>
                 <div class="location-info">
-                    <p>
-                        <i class="fa fa-map-marker"></i>
-                        California
-                    </p>
+                    <p><i class="fas fa-map-marker-alt"></i> California, United States</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <aside class="profile-card">
-        <header>
-            <div class="profile-image">
-                <img src="public/blue.jpeg" alt="Michael Preciado - Software Developer">
-            </div>
-            <div class="profile-header-text">
-                <h1>Michael Preciado</h1>
-                <h2>Software & AI Solutions</h2>
-                <div class="profile-tags">
-                    <span class="profile-tag">
-                        <i class="fas fa-fighter-jet"></i>
-                        Air Force Veteran
-                    </span>
-                    <span class="profile-tag">
-                        <i class="fas fa-microchip"></i>
-                        Tech Enthusiast
-                    </span>
-                    <span class="profile-tag">
-                        <i class="fas fa-code"></i>
-                        Full-Stack Developer
-                    </span>
-                    <span class="profile-tag">
-                        <i class="fas fa-database"></i>
-                        Data Analyst
-                    </span>
-                    <span class="profile-tag">
-                        <i class="fas fa-robot"></i>
-                        AI Developer
-                    </span>
-                    <span class="profile-tag">
-                        <i class="fas fa-shield-alt"></i>
-                        Cybersecurity
-                    </span>
+    <main class="content-container">
+        <aside class="profile-card">
+            <header>
+                <div class="profile-image">
+                    <img src="public/blue.jpeg" alt="Michael Preciado - Software Developer">
                 </div>
-                <div class="job-ready-description">
-                    <p>Passionate about leveraging technology to solve real-world problems. Seeking opportunities to contribute to innovative projects and grow within a dynamic team.</p>
+                <div class="profile-header-text">
+                    <h1>Michael<br class="mobile-break">Preciado</h1>
+                    <h2>Software & AI Solutions</h2>
+                    <div class="profile-tags">
+                        <span class="profile-tag">
+                            <i class="fas fa-fighter-jet"></i>
+                            Air Force Veteran
+                        </span>
+                        <span class="profile-tag">
+                            <i class="fas fa-microchip"></i>
+                            Tech Enthusiast
+                        </span>
+                        <span class="profile-tag">
+                            <i class="fas fa-code"></i>
+                            Full-Stack Developer
+                        </span>
+                        <span class="profile-tag">
+                            <i class="fas fa-database"></i>
+                            Data Analyst
+                        </span>
+                        <span class="profile-tag">
+                            <i class="fas fa-robot"></i>
+                            AI Implementation
+                        </span>
+                    </div>
+                    <div class="job-ready-description">
+                        <p>Passionate about leveraging technology to solve real-world problems. Seeking opportunities to contribute to innovative projects and grow within a dynamic team.</p>
+                    </div>
                 </div>
+            </header>
+
+            <ul class="profile-social-links">
+                <li>
+                    <a href="https://twitter.com/MichaelPreciad0" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-x-twitter"></i>
+                        <span>X</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/michaelpreciado" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.linkedin.com/in/michael-preciado/" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/michaelpreciado/" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.tiktok.com/@michaelpreciado" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-tiktok"></i>
+                        <span>TikTok</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.etsy.com/shop/PrintsByPreciado" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-etsy"></i>
+                        <span>Etsy</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="projects.html">
+                        <i class="fas fa-folder-open"></i>
+                        <span>Projects</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <div class="bio-cards">
+            <div class="bio-card">
+                <i class="bio-card-icon fas fa-terminal"></i>
+                <h3>Self-Taught Software Developer</h3>
+                <p>Experienced in full-stack development utilizing Python, Java, and SQL. Proficient in modern web technologies, RESTful APIs, and cloud services. Strong focus on scalable and efficient solutions.</p>
             </div>
-        </header>
+            
+            <div class="bio-card">
+                <i class="bio-card-icon fas fa-microchip"></i>
+                <h3>AI & Machine Learning</h3>
+                <p>Specialized in AI integration and automation for business process optimization. Experienced with machine learning models, data analysis, and implementing AI-driven solutions.</p>
+            </div>
+            
+            <div class="bio-card">
+                <i class="bio-card-icon fas fa-server"></i>
+                <h3>IT Systems Specialist</h3>
+                <p>Expert in network infrastructure, system administration, and cybersecurity. Skilled in hardware diagnostics, performance optimization, and implementing robust security measures.</p>
+            </div>
+        </div>
+    </main>
 
-        <ul class="profile-social-links">
-            <li>
-                <a href="https://x.com/mpdollars" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
-                    <span>X</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://github.com/michaelpreciado" target="_blank" rel="noopener noreferrer">
-                    <i class="fa fa-github" aria-hidden="true"></i>
-                    <span>GitHub</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.linkedin.com/in/michael-preciado-74959b227/" target="_blank" rel="noopener noreferrer">
-                    <i class="fa fa-linkedin" aria-hidden="true"></i>
-                    <span>LinkedIn</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.etsy.com/shop/PrintsByPreciado?ref=seller-platform-mcnav" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-etsy" aria-hidden="true"></i>
-                    <span>Etsy</span>
-                </a>
-            </li>
-            <li>
-                <a href="projects.html">
-                    <i class="fa fa-folder-open" aria-hidden="true"></i>
-                    <span>Projects</span>
-                </a>
-            </li>
-        </ul>
-    </aside>
-
-    <div class="bio-cards">
-        <div class="bio-card">
-            <i class="bio-card-icon fas fa-terminal"></i>
-            <h3>Self-Taught Software Developer</h3>
-            <p>Experienced in full-stack development utilizing Python, Java, and SQL. Proficient in modern web technologies, RESTful APIs, and cloud services. Strong focus on scalable and efficient solutions.</p>
-        </div>
-        
-        <div class="bio-card">
-            <i class="bio-card-icon fas fa-microchip"></i>
-            <h3>AI & Machine Learning</h3>
-            <p>Specialized in AI integration and automation for business process optimization. Experienced with machine learning models, data analysis, and implementing AI-driven solutions.</p>
-        </div>
-        
-        <div class="bio-card">
-            <i class="bio-card-icon fas fa-server"></i>
-            <h3>IT Systems Specialist</h3>
-            <p>Expert in network infrastructure, system administration, and cybersecurity. Skilled in hardware diagnostics, performance optimization, and implementing robust security measures.</p>
-        </div>
-    </div>
+    <footer class="mp-footer">
+        Created by <span>MP</span>
+    </footer>
 
     <div id="particles-js"></div>
-    <div class="signature">Created by <span>MP</span></div>
     <script src='https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js'></script>
-    <script src="https://kit.fontawesome.com/2ee2f92aca.js" crossorigin="anonymous"></script>
     <script src="./header.js"></script>
     <script src="./script.js"></script>
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.body.classList.toggle('sidebar-open');
+        }
+    </script>
 </body>
 
 </html>

@@ -3,21 +3,28 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Michael Preciado - Projects</title>
+    <title>Projects - Michael Preciado</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="projects.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <header class="main-header">
         <div class="header-content">
+            <a href="/" class="back-to-home">
+                <i class="fa fa-chevron-left"></i>
+                <span>Home</span>
+            </a>
             <button class="hamburger-menu" onclick="toggleSidebar()">
                 <i class="fa fa-address-card"></i>
+                <span>Contact</span>
             </button>
         </div>
     </header>
@@ -30,171 +37,146 @@
             <div class="contact-section">
                 <h2>Let's Connect!</h2>
                 <div class="contact-info">
-                    <a href="mailto:mpreciado1997@gmail.com" class="contact-item">
-                        <i class="fa fa-envelope"></i>
-                        <span>mpreciado1997@gmail.com</span>
+                    <a href="mailto:michael.preciado1995@gmail.com" class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>michael.preciado1995@gmail.com</span>
+                    </a>
+                    <a href="https://github.com/michaelpreciado" target="_blank" class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/michael-preciado/" target="_blank" class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://twitter.com/MichaelPreciad0" target="_blank" class="contact-item">
+                        <i class="fab fa-x-twitter"></i>
+                        <span>X (Twitter)</span>
                     </a>
                 </div>
                 <div class="location-info">
-                    <p>
-                        <i class="fa fa-map-marker"></i>
-                        California
-                    </p>
+                    <p><i class="fas fa-map-marker-alt"></i> California, United States</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="content-container">
-        <aside class="profile-card">
-            <header>
-                <div class="profile-image">
-                    <img src="public/blue.jpeg" alt="Michael Preciado - Software Developer">
-                </div>
-                <div class="profile-header-text">
-                    <h1>Michael Preciado</h1>
-                    <h2>Software & AI Solutions</h2>
-                    <div class="profile-tags">
-                        <span class="profile-tag">
-                            <i class="fas fa-fighter-jet"></i>
-                            Air Force Veteran
-                        </span>
-                        <span class="profile-tag">
-                            <i class="fas fa-microchip"></i>
-                            Tech Enthusiast
-                        </span>
-                        <span class="profile-tag">
-                            <i class="fas fa-code"></i>
-                            Full-Stack Developer
-                        </span>
-                        <span class="profile-tag">
-                            <i class="fas fa-database"></i>
-                            Data Analyst
-                        </span>
-                        <span class="profile-tag">
-                            <i class="fas fa-robot"></i>
-                            AI Developer
-                        </span>
-                        <span class="profile-tag">
-                            <i class="fas fa-terminal"></i>
-                            CLI Tools
-                        </span>
-                        <span class="profile-tag">
-                            <i class="fas fa-project-diagram"></i>
-                            System Design
-                        </span>
-                        <span class="profile-tag">
-                            <i class="fas fa-shield-alt"></i>
-                            Cybersecurity
-                        </span>
-                    </div>
-                    <div class="job-ready-description">
-                        <p>Passionate about leveraging technology to solve real-world problems. Seeking opportunities to contribute to innovative projects and grow within a dynamic team.</p>
-                    </div>
-                </div>
-            </header>
-
-            <ul class="profile-social-links">
-                <li>
-                    <a href="https://x.com/mpdollars" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
-                        <span>X</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://github.com/michaelpreciado" target="_blank" rel="noopener noreferrer">
-                        <i class="fa fa-github" aria-hidden="true"></i>
-                        <span>GitHub</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.linkedin.com/in/michael-preciado-74959b227/" target="_blank" rel="noopener noreferrer">
-                        <i class="fa fa-linkedin" aria-hidden="true"></i>
-                        <span>LinkedIn</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.etsy.com/shop/PrintsByPreciado?ref=seller-platform-mcnav" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-brands fa-etsy" aria-hidden="true"></i>
-                        <span>Etsy</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="index.html">
-                        <i class="fa fa-home" aria-hidden="true"></i>
-                        <span>Home</span>
-                    </a>
-                </li>
-            </ul>
-        </aside>
+    <main class="projects-container">
+        <div class="projects-header">
+            <h1>My Projects</h1>
+            <p>Here's a collection of my recent work and personal projects. Each one represents a unique challenge and learning experience.</p>
+        </div>
 
         <div class="project-cards">
-            <div class="project-card">
-                <i class="project-card-icon fas fa-camera-retro"></i>
-                <h3>Film Photography Portfolio</h3>
-                <img src="public/mp.jpeg" alt="Film Photography Portfolio">
-                <p>Personal collection of film photography capturing moments in analog. Shot on various film cameras and formats, focusing on street photography and portraiture.</p>
-                <div class="project-links">
-                    <a href="https://michaelpreciado.github.io/MP.FIlmCollection/" class="project-link" target="_blank">
-                        <i class="fa fa-camera"></i>
-                        <span>View Gallery</span>
-                    </a>
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Code Editor Project">
                 </div>
-            </div>
+                <div class="project-content">
+                    <h2 class="project-title">Personal Website</h2>
+                    <p class="project-description">A modern, cyberpunk-themed portfolio website built with HTML, CSS, and JavaScript. Features responsive design, smooth animations, and interactive elements.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">HTML5</span>
+                        <span class="project-tag">CSS3</span>
+                        <span class="project-tag">JavaScript</span>
+                        <span class="project-tag">Responsive</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/michaelpreciado/personal-website" class="project-link" target="_blank">
+                            <i class="fab fa-github"></i>
+                            <span>View Code</span>
+                        </a>
+                        <a href="/" class="project-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            <span>Live Demo</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
 
-            <div class="project-card">
-                <i class="project-card-icon fas fa-palette"></i>
-                <h3>Photography Portfolio Website</h3>
-                <img src="public/djset.jpg" alt="Photography Portfolio Website">
-                <p>Custom-built portfolio website for freelance photographers. Features include gallery management, booking system, and client galleries with modern, minimalist design.</p>
-                <div class="project-links">
-                    <a href="https://michaelpreciado.github.io/mario.preciado.photography/" class="project-link" target="_blank">
-                        <i class="fa fa-globe"></i>
-                        <span>Live Demo</span>
-                    </a>
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Machine Learning Project">
                 </div>
-            </div>
+                <div class="project-content">
+                    <h2 class="project-title">AI Chat Assistant</h2>
+                    <p class="project-description">An intelligent chatbot powered by machine learning, capable of natural language understanding and real-time responses. Built with Python and TensorFlow.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">TensorFlow</span>
+                        <span class="project-tag">NLP</span>
+                        <span class="project-tag">API</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link" target="_blank">
+                            <i class="fab fa-github"></i>
+                            <span>View Code</span>
+                        </a>
+                        <a href="#" class="project-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            <span>Live Demo</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
 
-            <div class="project-card">
-                <i class="project-card-icon fas fa-robot"></i>
-                <h3>Personal AI Assistant (Coming Soon)</h3>
-                <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=800&q=80" alt="Personal AI Assistant">
-                <p>A sophisticated personal AI assistant powered by advanced language models, offering natural conversations and task automation. Currently in development.</p>
-                <div class="project-links">
-                    <a href="#" class="project-link disabled">
-                        <i class="fa fa-clock-o"></i>
-                        <span>In Development</span>
-                    </a>
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Cybersecurity Project">
                 </div>
-            </div>
+                <div class="project-content">
+                    <h2 class="project-title">Secure File Transfer</h2>
+                    <p class="project-description">A secure file transfer system with end-to-end encryption, user authentication, and real-time transfer status. Built with Node.js and WebSocket.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Node.js</span>
+                        <span class="project-tag">WebSocket</span>
+                        <span class="project-tag">Encryption</span>
+                        <span class="project-tag">Security</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link" target="_blank">
+                            <i class="fab fa-github"></i>
+                            <span>View Code</span>
+                        </a>
+                        <a href="#" class="project-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            <span>Live Demo</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
 
-            <div class="project-card">
-                <i class="project-card-icon fas fa-brain"></i>
-                <h3>Neural Network Visualizer (Coming Soon)</h3>
-                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" alt="Neural Network Visualizer">
-                <p>Interactive visualization tool for neural networks, helping users understand deep learning architectures. Project launching soon.</p>
-                <div class="project-links">
-                    <a href="#" class="project-link disabled">
-                        <i class="fa fa-clock-o"></i>
-                        <span>In Development</span>
-                    </a>
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Data Visualization Project">
                 </div>
-            </div>
-
-            <div class="project-card">
-                <i class="project-card-icon fas fa-chart-bar"></i>
-                <h3>Data Visualization Dashboard (Coming Soon)</h3>
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Data Visualization Dashboard">
-                <p>Interactive data visualization platform featuring real-time analytics, customizable charts, and intuitive user interface for complex data analysis.</p>
-                <div class="project-links">
-                    <a href="#" class="project-link disabled">
-                        <i class="fa fa-clock-o"></i>
-                        <span>In Development</span>
-                    </a>
+                <div class="project-content">
+                    <h2 class="project-title">Data Visualizer</h2>
+                    <p class="project-description">An interactive data visualization tool that transforms complex datasets into meaningful insights through dynamic charts and graphs.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">React</span>
+                        <span class="project-tag">D3.js</span>
+                        <span class="project-tag">TypeScript</span>
+                        <span class="project-tag">Analytics</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link" target="_blank">
+                            <i class="fab fa-github"></i>
+                            <span>View Code</span>
+                        </a>
+                        <a href="#" class="project-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            <span>Live Demo</span>
+                        </a>
+                    </div>
                 </div>
-            </div>
+            </article>
         </div>
-    </div>
+    </main>
+
+    <footer class="mp-footer">
+        Created by <span>MP</span>
+    </footer>
 
     <div id="particles-js"></div>
     <div class="signature">Created by <span>MP</span></div>
@@ -202,6 +184,12 @@
     <script src="https://kit.fontawesome.com/2ee2f92aca.js" crossorigin="anonymous"></script>
     <script src="./header.js"></script>
     <script src="./script.js"></script>
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.body.classList.toggle('sidebar-open');
+        }
+    </script>
 </body>
 
 </html> 

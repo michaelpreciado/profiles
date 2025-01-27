@@ -46,70 +46,70 @@
 
 @keyframes glitch-anim {
     0% {
-        clip: rect(31px, 9999px, 94px, 0);
+        clip-path: inset(31% 0 6% 0);
         transform: skew(0.85deg);
     }
     5% {
-        clip: rect(70px, 9999px, 71px, 0);
+        clip-path: inset(70% 0 29% 0);
         transform: skew(0.85deg);
     }
     10% {
-        clip: rect(29px, 9999px, 76px, 0);
+        clip-path: inset(29% 0 24% 0);
         transform: skew(0.85deg);
     }
     15% {
-        clip: rect(9px, 9999px, 85px, 0);
+        clip-path: inset(9% 0 15% 0);
         transform: skew(0.85deg);
     }
     20% {
-        clip: rect(25px, 9999px, 66px, 0);
+        clip-path: inset(25% 0 34% 0);
         transform: skew(0.85deg);
     }
     25% {
-        clip: rect(54px, 9999px, 93px, 0);
+        clip-path: inset(54% 0 7% 0);
         transform: skew(0.85deg);
     }
     30% {
-        clip: rect(22px, 9999px, 31px, 0);
+        clip-path: inset(22% 0 69% 0);
         transform: skew(0.85deg);
     }
     35% {
-        clip: rect(86px, 9999px, 92px, 0);
+        clip-path: inset(86% 0 8% 0);
         transform: skew(0.85deg);
     }
 }
 
 @keyframes glitch-anim2 {
     0% {
-        clip: rect(65px, 9999px, 99px, 0);
+        clip-path: inset(65% 0 1% 0);
         transform: skew(0.85deg);
     }
     5% {
-        clip: rect(79px, 9999px, 83px, 0);
+        clip-path: inset(79% 0 17% 0);
         transform: skew(0.85deg);
     }
     10% {
-        clip: rect(12px, 9999px, 86px, 0);
+        clip-path: inset(12% 0 14% 0);
         transform: skew(0.85deg);
     }
     15% {
-        clip: rect(86px, 9999px, 98px, 0);
+        clip-path: inset(86% 0 2% 0);
         transform: skew(0.85deg);
     }
     20% {
-        clip: rect(17px, 9999px, 45px, 0);
+        clip-path: inset(17% 0 55% 0);
         transform: skew(0.85deg);
     }
     25% {
-        clip: rect(32px, 9999px, 84px, 0);
+        clip-path: inset(32% 0 16% 0);
         transform: skew(0.85deg);
     }
     30% {
-        clip: rect(27px, 9999px, 73px, 0);
+        clip-path: inset(27% 0 27% 0);
         transform: skew(0.85deg);
     }
     35% {
-        clip: rect(46px, 9999px, 80px, 0);
+        clip-path: inset(46% 0 20% 0);
         transform: skew(0.85deg);
     }
 }
@@ -451,36 +451,6 @@
 .project-card .profile-tag:hover {
     border-color: var(--term-cyan-bright);
     box-shadow: var(--term-glow);
-}
-
-.profile-tag {
-    font-size: calc(var(--font-size-xs) * 0.5); /* Even smaller text */
-    color: var(--term-cyan-dim);
-    background: transparent;
-    padding: 0px calc(var(--space-xs) * 0.3); /* Minimal padding */
-    border-radius: 2px; /* Smaller border radius */
-    border: 1px solid var(--term-cyan-dark);
-    display: inline-flex;
-    align-items: center;
-    gap: calc(var(--space-2xs) * 0.3); /* Minimal gap */
-    white-space: nowrap;
-    transform-origin: left center;
-    transition: all var(--transition-fast);
-    margin: 0.5px; /* Smaller margin */
-    height: 14px; /* Fixed small height */
-    
-    @media (max-width: 480px) {
-        font-size: calc(var(--font-size-xs) * 0.45); /* Tiny on mobile */
-        padding: 0px calc(var(--space-2xs) * 0.5);
-        gap: calc(var(--space-2xs) * 0.2);
-        height: 12px; /* Even smaller height on mobile */
-    }
-}
-
-.profile-tag i {
-    font-size: calc(var(--font-size-xs) * 0.5); /* Match new text size */
-    color: var(--term-cyan-bright);
-    text-shadow: var(--term-glow);
 }
 
 .profile-tags {

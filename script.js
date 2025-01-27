@@ -84,8 +84,228 @@ particlesJS("particles-js", {
   "retina_detect": true
 });
 
+// Carousel Configuration
+const ANIMATION_DURATION = 400;
+const TOUCH_CONFIG = {
+    threshold: 20,
+    velocityThreshold: 0.5,
+    maxBounceOffset: 100,
+    bounceDistance: 30
+};
+
+class ProjectCarousel {
+    constructor() {
+        this.track = document.querySelector('.projects-track');
+        this.cards = Array.from(this.track.getElementsByClassName('project-card'));
+        this.prevButton = document.querySelector('.carousel-button.prev');
+        this.nextButton = document.querySelector('.carousel-button.next');
+        
+        this.state = {
+            currentIndex: 0,
+            isScrolling: false,
+            touch: {
+                startY: 0,
+                lastY: 0,
+                offset: 0,
+                velocity: 0,
+                lastTime: 0
+            },
+            animationFrame: null
+        };
+        
+        this.initializeCarousel();
+    }
+    
+    initializeCarousel() {
+        this.updateCards();
+        this.setupEventListeners();
+    }
+    
+    updateCards(offset = 0) {
+        this.cards.forEach((card, index) => {
+            // Remove all position classes
+            card.classList.remove('active', 'prev', 'next', 'far-prev', 'far-next', 'far-far-prev');
+            
+            const position = index - this.state.currentIndex;
+            
+            // Apply transform for touch movement
+            const transform = offset !== 0 ? `translateY(${offset}px)` : '';
+            card.style.transform = transform;
+            card.style.transition = offset !== 0 ? 'none' : 'transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            
+            // Add position class
+            if (position === 0) card.classList.add('active');
+            else if (position === -1) card.classList.add('prev');
+            else if (position === -2) card.classList.add('far-prev');
+            else if (position <= -3) card.classList.add('far-far-prev');
+            else if (position === 1) card.classList.add('next');
+            else if (position >= 2) card.classList.add('far-next');
+        });
+        
+        this.updateButtonStates();
+    }
+    
+    updateButtonStates() {
+        const { currentIndex } = this.state;
+        const isAtStart = currentIndex <= 0;
+        const isAtEnd = currentIndex >= this.cards.length - 1;
+        
+        this.prevButton.style.opacity = isAtStart ? "0.5" : "1";
+        this.nextButton.style.opacity = isAtEnd ? "0.5" : "1";
+        this.prevButton.classList.toggle('active', !isAtStart);
+        this.nextButton.classList.toggle('active', !isAtEnd);
+    }
+    
+    async slide(direction, animate = true) {
+        if (this.state.isScrolling) return;
+        
+        const isNext = direction === 'next';
+        const canMove = isNext ? 
+            this.state.currentIndex < this.cards.length - 1 : 
+            this.state.currentIndex > 0;
+        
+        this.state.isScrolling = true;
+        
+        if (!canMove) {
+            this.applyBounceEffect(direction);
+            // Reset isScrolling after bounce animation
+            setTimeout(() => {
+                this.state.isScrolling = false;
+            }, 200);
+            return;
+        }
+        
+        this.state.currentIndex += isNext ? 1 : -1;
+        this.updateCards();
+        
+        if (animate) {
+            const button = isNext ? this.nextButton : this.prevButton;
+            button.classList.add('clicked');
+            setTimeout(() => button.classList.remove('clicked'), 200);
+        }
+        
+        // Ensure isScrolling is reset after animation or immediately if not animating
+        setTimeout(() => {
+            this.state.isScrolling = false;
+        }, animate ? ANIMATION_DURATION : 0);
+    }
+    
+    applyBounceEffect(direction) {
+        const bounceOffset = direction === 'next' ? -TOUCH_CONFIG.bounceDistance : TOUCH_CONFIG.bounceDistance;
+        this.updateCards(bounceOffset);
+        setTimeout(() => this.updateCards(0), 200);
+    }
+    
+    handleTouchStart(e) {
+        if (this.state.animationFrame) {
+            cancelAnimationFrame(this.state.animationFrame);
+        }
+        
+        // Force reset isScrolling state on new touch
+        this.state.isScrolling = false;
+        
+        const touch = e.touches[0];
+        this.state.touch = {
+            startY: touch.clientY,
+            lastY: touch.clientY,
+            lastTime: Date.now(),
+            velocity: 0,
+            offset: 0
+        };
+        
+        this.cards.forEach(card => card.style.transition = 'none');
+    }
+    
+    handleTouchMove(e) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const currentTime = Date.now();
+        const deltaY = touch.clientY - this.state.touch.lastY;
+        const deltaTime = currentTime - this.state.touch.lastTime;
+        
+        // Update velocity
+        if (deltaTime > 0) {
+            this.state.touch.velocity = deltaY / deltaTime;
+        }
+        
+        // Update touch tracking
+        this.state.touch.lastY = touch.clientY;
+        this.state.touch.lastTime = currentTime;
+        
+        // Calculate offset with boundary resistance
+        this.state.touch.offset = touch.clientY - this.state.touch.startY;
+        
+        // Apply resistance at boundaries
+        if (this.state.currentIndex <= 0 && this.state.touch.offset > 0) {
+            this.state.touch.offset = Math.sqrt(this.state.touch.offset) * 5;
+        } else if (this.state.currentIndex >= this.cards.length - 1 && this.state.touch.offset < 0) {
+            this.state.touch.offset = -Math.sqrt(-this.state.touch.offset) * 5;
+        }
+        
+        this.updateCards(this.state.touch.offset);
+    }
+    
+    handleTouchEnd() {
+        const { velocity, offset } = this.state.touch;
+        const absVelocity = Math.abs(velocity);
+        
+        if (absVelocity > TOUCH_CONFIG.velocityThreshold || Math.abs(offset) > TOUCH_CONFIG.threshold) {
+            if (velocity < 0 || offset < -TOUCH_CONFIG.threshold) {
+                this.slide('next', false);
+            } else if (velocity > 0 || offset > TOUCH_CONFIG.threshold) {
+                this.slide('prev', false);
+            }
+        } else {
+            this.updateCards(0);
+            // Reset isScrolling state if no slide occurs
+            this.state.isScrolling = false;
+        }
+        
+        // Reset touch state
+        this.state.touch = {
+            startY: 0,
+            lastY: 0,
+            offset: 0,
+            velocity: 0,
+            lastTime: 0
+        };
+        
+        // Safety timeout to ensure isScrolling is eventually reset
+        setTimeout(() => {
+            this.state.isScrolling = false;
+        }, ANIMATION_DURATION + 100);
+    }
+    
+    setupEventListeners() {
+        // Touch Events
+        this.track.addEventListener('touchstart', e => this.handleTouchStart(e), { passive: true });
+        this.track.addEventListener('touchmove', e => this.handleTouchMove(e), { passive: false });
+        this.track.addEventListener('touchend', () => this.handleTouchEnd());
+        
+        // Mouse Wheel
+        let wheelTimeout;
+        this.track.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            if (wheelTimeout) clearTimeout(wheelTimeout);
+            
+            wheelTimeout = setTimeout(() => {
+                this.slide(e.deltaY > 0 ? 'next' : 'prev');
+            }, 50);
+        }, { passive: false });
+        
+        // Button Clicks
+        this.nextButton.addEventListener('click', () => this.slide('next'));
+        this.prevButton.addEventListener('click', () => this.slide('prev'));
+    }
+}
+
+// Initialize carousel when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const carousel = new ProjectCarousel();
+});
+
 // Unified typing effect function
-function typeText(element, text, speed = 5) {
+function typeText(element, text, speed = 50) {
     return new Promise(resolve => {
         if (!element || !text) {
             resolve();
@@ -381,4 +601,23 @@ projectCards.forEach(card => applyRandomFlicker(card));
 
 // Add flicker class in CSS
 // .flicker { animation: terminalFlicker 10s infinite; }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const nameElement = document.querySelector('.profile-header-text h1');
+    const fullName = 'Michael Preciado';
+    let currentIndex = 0;
+
+    function typeLetter() {
+        if (currentIndex < fullName.length) {
+            nameElement.textContent = fullName.substring(0, currentIndex + 1);
+            currentIndex++;
+            setTimeout(typeLetter, 500 / fullName.length);
+        } else {
+            nameElement.classList.add('glitch');
+        }
+    }
+
+    nameElement.textContent = '';
+    typeLetter();
+});
 

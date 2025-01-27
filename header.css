@@ -2,74 +2,207 @@
 .main-header {
     position: fixed;
     top: 0;
-    right: 0;
-    width: auto;
+    left: 0;
+    width: 100%;
     z-index: 1000;
-    background: transparent;
-    padding: 1rem 2rem;
+    background: rgba(0, 18, 21, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--term-cyan-dark);
+    padding: var(--space-sm) var(--space-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transition-normal);
 }
 
 .header-content {
     display: flex;
-    justify-content: flex-end;
     align-items: center;
+    gap: var(--space-md);
+}
+
+.back-to-home, .hamburger-menu {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--term-cyan);
+    text-decoration: none;
+    font-size: var(--font-size-md);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: 4px;
+    transition: var(--transition-normal);
+}
+
+.back-to-home:hover, .hamburger-menu:hover {
+    color: var(--term-cyan-bright);
+    text-shadow: 0 0 8px var(--term-cyan);
 }
 
 .hamburger-menu {
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid var(--term-cyan-dark);
-    border-radius: 8px;
-    color: var(--term-cyan);
+    background: rgba(0, 230, 255, 0.1);
+    border: 2px solid var(--term-cyan);
+    border-radius: 12px;
+    color: var(--term-cyan-bright);
     font-size: 1.2rem;
     cursor: pointer;
-    padding: 0.8rem;
+    padding: 0.8rem 1.2rem;
     transition: all 0.3s ease;
     box-shadow: var(--term-glow);
-    position: relative;
-    z-index: 1000;
-    margin-right: 1rem;
-    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.hamburger-menu span {
+    font-size: 0.9rem;
+    display: none;
 }
 
 .hamburger-menu:hover {
-    color: var(--term-cyan-bright);
-    text-shadow: 0 0 8px var(--term-cyan);
-    transform: translateX(-2px);
-    box-shadow: 0 0 15px var(--term-cyan);
-    background: rgba(0, 18, 21, 0.9);
-}
-
-.hamburger-menu i {
-    font-size: 1.4rem;
-    color: var(--term-cyan-bright);
-    text-shadow: var(--term-glow);
-}
-
-/* Sidebar/Contact Card Styles */
-.sidebar {
-    position: fixed;
-    top: 80px;
-    right: 40px;
-    transform: scale(0);
-    width: 300px;
-    background: rgba(0, 18, 21, 0.7);
-    border: 2px solid var(--term-cyan-dark);
-    border-radius: 12px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 999;
-    box-shadow: var(--term-glow);
-    padding: 1.5rem;
-    transform-origin: top right;
-    opacity: 0;
-    backdrop-filter: blur(10px);
-}
-
-.sidebar.active {
-    transform: scale(1);
-    opacity: 1;
+    background: rgba(0, 230, 255, 0.2);
+    transform: translateY(-2px);
     box-shadow: 0 0 20px var(--term-cyan);
 }
 
+/* Enhanced Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 100%;
+    max-width: 400px;
+    background: rgba(0, 18, 21, 0.95);
+    border-left: 2px solid var(--term-cyan);
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    z-index: 999;
+    box-shadow: var(--term-glow);
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    overflow-y: auto;
+    will-change: transform;
+}
+
+.sidebar.active {
+    transform: translateX(0);
+    right: 0;
+}
+
+.contact-section {
+    margin-top: 3rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease-out, transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.sidebar.active .contact-section {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.contact-section h2 {
+    font-size: 1.8rem;
+    color: var(--term-cyan-bright);
+    margin-bottom: 2rem;
+    text-align: center;
+    text-shadow: var(--term-glow);
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-item {
+    background: rgba(0, 230, 255, 0.1);
+    border: 1px solid var(--term-cyan);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--term-cyan);
+    text-decoration: none;
+    transform: translateX(-10px);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    will-change: transform, opacity;
+}
+
+.sidebar.active .contact-item {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.sidebar.active .contact-item:nth-child(1) { transition-delay: 0.1s; }
+.sidebar.active .contact-item:nth-child(2) { transition-delay: 0.15s; }
+.sidebar.active .contact-item:nth-child(3) { transition-delay: 0.2s; }
+.sidebar.active .contact-item:nth-child(4) { transition-delay: 0.25s; }
+
+.contact-item i {
+    font-size: 1.5rem;
+    color: var(--term-cyan-bright);
+}
+
+.contact-item:hover {
+    background: rgba(0, 230, 255, 0.2);
+    transform: translateX(5px);
+    box-shadow: 0 0 15px var(--term-cyan);
+}
+
+/* Mobile Optimizations */
+@media (min-width: 768px) {
+    .hamburger-menu span {
+        display: inline;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        padding: 1.5rem;
+    }
+
+    .contact-section {
+        margin-top: 2rem;
+    }
+
+    .contact-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .contact-item {
+        padding: 0.8rem;
+    }
+}
+
+/* Close button enhancement */
+.close-sidebar {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0, 230, 255, 0.1);
+    border: 2px solid var(--term-cyan);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    will-change: transform;
+}
+
+.close-sidebar:hover {
+    background: rgba(0, 230, 255, 0.2);
+    transform: rotate(90deg);
+    box-shadow: 0 0 15px var(--term-cyan);
+}
+
+/* Sidebar/Contact Card Styles */
 .sidebar::after {
     content: '';
     position: absolute;
@@ -77,131 +210,17 @@
     background: linear-gradient(
         transparent 50%,
         rgba(0, 230, 255, 0.025) 50%
-    ),
-    repeating-linear-gradient(
-        transparent 0px,
-        transparent 1px,
-        rgba(0, 230, 255, 0.05) 2px,
-        rgba(0, 230, 255, 0.05) 3px
     );
-    background-size: 100% 4px, 100% 4px;
+    background-size: 100% 4px;
     pointer-events: none;
-    animation: scanline 8s linear infinite;
+    animation: scanline 15s linear infinite;
     opacity: 0.3;
-    border-radius: 12px;
     z-index: -1;
+    will-change: transform;
 }
 
 .sidebar-content {
     position: relative;
-}
-
-.close-sidebar {
-    position: absolute;
-    top: -1rem;
-    right: -1rem;
-    background: rgba(0, 0, 0, 0.8);
-    border: 1px solid var(--term-cyan-dark);
-    border-radius: 50%;
-    color: var(--term-cyan);
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.close-sidebar:hover {
-    color: var(--term-cyan-bright);
-    transform: scale(1.1);
-    box-shadow: 0 0 10px var(--term-cyan);
-}
-
-.contact-section {
-    text-align: center;
-}
-
-.contact-section h2 {
-    font-size: 1.5rem;
-    color: #FFFFFF;
-    margin: 0 0 1.5rem;
-    text-shadow: var(--term-glow);
-    border-bottom: 1px solid var(--term-cyan-dark);
-    padding-bottom: 0.5rem;
-    position: relative;
-}
-
-.contact-section h2::after {
-    content: '_';
-    display: inline-block;
-    color: var(--term-cyan-bright);
-    animation: blink 1s step-end infinite;
-    margin-left: 2px;
-}
-
-@keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
-}
-
-.contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.contact-item {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    color: var(--term-cyan);
-    text-decoration: none;
-    font-size: 0.9rem;
-    padding: 0.8rem;
-    border-radius: 8px;
-    background: rgba(0, 230, 230, 0.05);
-    border: 1px solid var(--term-cyan-dark);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.contact-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(0, 230, 230, 0.2),
-        transparent
-    );
-    transition: left 0.5s ease;
-}
-
-.contact-item:hover::before {
-    left: 100%;
-}
-
-.contact-item i {
-    font-size: 1.2rem;
-    color: var(--term-cyan-bright);
-    text-shadow: var(--term-glow);
-    min-width: 20px;
-    text-align: center;
-}
-
-.contact-item:hover {
-    background: rgba(0, 230, 230, 0.1);
-    color: var(--term-cyan-bright);
-    transform: translateX(4px);
-    box-shadow: 0 0 10px var(--term-cyan);
 }
 
 .location-info {
@@ -226,19 +245,13 @@
 }
 
 /* Scanline effect */
-.sidebar::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        transparent 50%,
-        rgba(0, 230, 230, 0.025) 50%
-    );
-    background-size: 100% 4px;
-    pointer-events: none;
-    animation: scanline 8s linear infinite;
-    opacity: 0.2;
-    border-radius: 12px;
+@keyframes scanline {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(100%);
+    }
 }
 
 /* Mobile adjustments */
@@ -255,5 +268,22 @@
     
     .hamburger-menu {
         margin-right: 0;
+    }
+
+    .contact-item {
+        padding: 0.8rem;
+    }
+}
+
+/* Prevent body scroll when sidebar is open */
+body.sidebar-open {
+    overflow: hidden;
+}
+
+/* Optimize backdrop blur performance */
+@supports (backdrop-filter: blur(10px)) {
+    .sidebar {
+        background: rgba(0, 18, 21, 0.85);
+        backdrop-filter: blur(10px);
     }
 } 
