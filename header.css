@@ -220,7 +220,11 @@
 }
 
 .sidebar-content {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    margin-top: 0;
 }
 
 .location-info {
