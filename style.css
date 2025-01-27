@@ -1,23 +1,24 @@
 /* ==========================================================================
    Design System Variables - Mobile First with Enhanced Desktop
+   Enhanced for touch devices and improved readability
    ========================================================================== */
 :root {
-    /* Colors */
-    --term-cyan: #00E6FF;
+    /* Colors - Adjusted for better contrast */
+    --term-cyan: #00D6FF;         /* Slightly darker for better readability */
     --term-cyan-bright: #00FFFF;
-    --term-cyan-dim: rgba(0, 230, 255, 0.7);
-    --term-cyan-dark: rgba(0, 230, 255, 0.3);
+    --term-cyan-dim: rgba(0, 214, 255, 0.8);  /* Increased opacity */
+    --term-cyan-dark: rgba(0, 214, 255, 0.4);  /* Increased opacity */
     --term-bg: #001215;
-    --term-overlay: rgba(0, 230, 255, 0.05);
+    --term-overlay: rgba(0, 214, 255, 0.08);   /* Slightly stronger overlay */
     
-    /* Typography - Enhanced Scale */
+    /* Typography - Enhanced Scale for Mobile */
     --font-mono: 'Share Tech Mono', 'Courier New', monospace;
-    --font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-    --font-size-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
-    --font-size-md: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
-    --font-size-lg: clamp(1.125rem, 1rem + 0.75vw, 1.375rem);
-    --font-size-xl: clamp(1.25rem, 1.1rem + 1vw, 1.75rem);
-    --font-size-2xl: clamp(1.5rem, 1.3rem + 1.25vw, 2.5rem);
+    --font-size-xs: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);        /* Increased base size */
+    --font-size-sm: clamp(1rem, 0.9rem + 0.375vw, 1.125rem);       /* Increased base size */
+    --font-size-md: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);        /* Adjusted for touch */
+    --font-size-lg: clamp(1.25rem, 1.15rem + 0.75vw, 1.5rem);      /* Adjusted for touch */
+    --font-size-xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);             /* Better scaling */
+    --font-size-2xl: clamp(1.75rem, 1.5rem + 1.25vw, 2.75rem);     /* Better scaling */
     --font-size-3xl: clamp(2rem, 1.8rem + 1.5vw, 3.5rem);
     
     /* Spacing - Enhanced Scale */
@@ -270,42 +271,42 @@ p {
     .box-glow, .box-glow-strong {
         box-shadow: none;
     }
-
-    h1, h2, h3, h4, h5, h6 {
-        margin-bottom: var(--space-sm);
-    }
-    p {
-        line-height: 1.8;
-    }
-    .card, .project-card {
-        padding: var(--space-md);
-    }
-    .contact-item, .hamburger-menu, .close-sidebar {
-        padding: 1rem;
-        min-width: 44px;
-        min-height: 44px;
-    }
 }
 
-/* Typography & Scaling */
-@media (max-width: 768px) {
-    h1 {
-        font-size: var(--font-size-2xl);
-    }
-    h2 {
-        font-size: var(--font-size-xl);
-    }
-    p, .project-description {
-        font-size: var(--font-size-sm);
-    }
+.profile-card {
+    padding: 1rem;
+    margin: 0 auto;
+    max-width: 600px;
 }
 
-/* Visual Consistency */
-@media (max-width: 768px) {
-    .text-glow, .box-glow {
-        box-shadow: none;
-    }
-    .project-image img {
-        object-fit: cover;
-    }
+.profile-header-text {
+    margin-bottom: 1rem;
+}
+
+.job-ready-description {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.profile-tags {
+    margin: 1rem 0;
+}
+
+.profile-tag {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: rgba(0, 230, 255, 0.1);
+    border: 2px solid var(--term-cyan);
+    border-radius: 16px;
+    font-size: 1.4rem;
+    color: var(--term-cyan);
+    transition: all 0.3s ease;
+    margin: 0.3rem;
+}
+
+.profile-tag i {
+    font-size: 1.6rem;
+    color: var(--term-cyan-bright);
 }

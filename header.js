@@ -4,6 +4,10 @@ function toggleSidebar() {
     const header = document.querySelector('.main-header');
     const body = document.body;
     
+    // Add transition class before toggling for smooth animation
+    sidebar.classList.add('sidebar-transition');
+    hamburger.classList.add('hamburger-transition');
+    
     sidebar.classList.toggle('active');
     hamburger.classList.toggle('active');
     header.classList.toggle('sidebar-active');
@@ -11,8 +15,14 @@ function toggleSidebar() {
     // Prevent body scroll when sidebar is open
     if (sidebar.classList.contains('active')) {
         body.style.overflow = 'hidden';
+        // Add touch event handling for mobile
+        sidebar.addEventListener('touchstart', handleTouchStart, false);
+        sidebar.addEventListener('touchmove', handleTouchMove, false);
     } else {
         body.style.overflow = '';
+        // Remove touch events when sidebar is closed
+        sidebar.removeEventListener('touchstart', handleTouchStart);
+        sidebar.removeEventListener('touchmove', handleTouchMove);
     }
 }
 

@@ -305,26 +305,24 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Unified typing effect function
-function typeText(element, text, speed = 50) {
+function typeText(element, text, speed = 50, startDelay = 0) {
     return new Promise(resolve => {
-        if (!element || !text) {
-            resolve();
-            return;
-        }
-        let index = 0;
-        element.textContent = '';
-        element.style.visibility = 'visible';
-        
-        function type() {
-            if (index < text.length) {
-                element.textContent += text.charAt(index);
-                index++;
-                setTimeout(type, speed);
-            } else {
-                resolve();
+        setTimeout(() => {
+            let index = 0;
+            element.textContent = '';
+            element.style.visibility = 'visible';
+            
+            function type() {
+                if (index < text.length) {
+                    element.textContent += text.charAt(index);
+                    index++;
+                    setTimeout(type, speed);
+                } else {
+                    resolve();
+                }
             }
-        }
-        type();
+            type();
+        }, startDelay);
     });
 }
 
@@ -360,9 +358,9 @@ async function initializeTypingEffects() {
         }
     });
 
-    // Type all elements simultaneously with very fast speed
+    // Type all elements simultaneously with a reasonable speed
     await Promise.all(
-        elementsToType.map(item => typeText(item.element, item.text, 5)) // Set speed to 5ms
+        elementsToType.map(item => typeText(item.element, item.text, 50)) // Set speed to 50ms
     );
 
     // After text is typed, fade in all tags immediately
@@ -611,7 +609,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (currentIndex < fullName.length) {
             nameElement.textContent = fullName.substring(0, currentIndex + 1);
             currentIndex++;
-            setTimeout(typeLetter, 500 / fullName.length);
+            setTimeout(typeLetter, 100); // Adjusted speed for clarity
         } else {
             nameElement.classList.add('glitch');
         }
