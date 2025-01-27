@@ -270,4 +270,42 @@ p {
     .box-glow, .box-glow-strong {
         box-shadow: none;
     }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-bottom: var(--space-sm);
+    }
+    p {
+        line-height: 1.8;
+    }
+    .card, .project-card {
+        padding: var(--space-md);
+    }
+    .contact-item, .hamburger-menu, .close-sidebar {
+        padding: 1rem;
+        min-width: 44px;
+        min-height: 44px;
+    }
+}
+
+/* Typography & Scaling */
+@media (max-width: 768px) {
+    h1 {
+        font-size: var(--font-size-2xl);
+    }
+    h2 {
+        font-size: var(--font-size-xl);
+    }
+    p, .project-description {
+        font-size: var(--font-size-sm);
+    }
+}
+
+/* Visual Consistency */
+@media (max-width: 768px) {
+    .text-glow, .box-glow {
+        box-shadow: none;
+    }
+    .project-image img {
+        object-fit: cover;
+    }
 }
