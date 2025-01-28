@@ -197,17 +197,132 @@ p {
     }
 }
 
-/* Enhanced Particles Background */
+/* Terminal-style animations */
+@keyframes terminalGlow {
+  0% { text-shadow: 0 0 8px var(--term-cyan); }
+  50% { text-shadow: 0 0 12px var(--term-cyan-bright); }
+  100% { text-shadow: 0 0 8px var(--term-cyan); }
+}
+
+@keyframes matrixScan {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100vh; }
+}
+
+.terminal-effect {
+  animation: terminalGlow 2s ease-in-out infinite;
+}
+
+/* Neural network particle connections */
 #particles-js {
-    position: fixed;
-    inset: 0;
-    z-index: var(--z-background);
-    opacity: 0.4;
-    pointer-events: none;
-    
-    @media (min-width: 1024px) {
-        opacity: 0.6;
-    }
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.neural-connection {
+  stroke-dasharray: 5;
+  animation: pulse 1.5s linear infinite;
+}
+
+@keyframes pulse {
+  0% { stroke-dashoffset: 10; opacity: 0.4; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+
+/* Terminal scanline overlay */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 230, 255, 0.05) 0px,
+    rgba(0, 230, 255, 0.05) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  animation: matrixScan 20s linear infinite;
+  z-index: 9999;
+}
+
+/* Text terminal effect */
+.terminal-text {
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  position: relative;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.terminal-text::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  text-shadow: -2px 0 #ff00c1;
+  color: transparent;
+  background: transparent;
+  overflow: hidden;
+  animation: glitch-1 2s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-1 {
+  0% { clip-path: inset(20% 0 30% 0); }
+  100% { clip-path: inset(10% 0 40% 0); }
+}
+
+.terminal-text.typing {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Override any conflicting animations */
+[data-type-effect] {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+[data-type-effect][data-typing-complete="true"] {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Ensure text is visible during typing */
+.profile-card h1,
+.profile-card h2,
+.bio-card h3,
+.bio-card p {
+  transition: opacity 0.3s ease;
+}
+
+/* Remove conflicting animations */
+.profile-card h1::before,
+.profile-card h1::after,
+.bio-card::before,
+.bio-card::after {
+  display: none;
+}
+
+/* Cursor animation */
+.type-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--term-cyan-bright);
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
 }
 
 /* Enhanced Utility Classes */
@@ -271,6 +386,120 @@ p {
     .box-glow, .box-glow-strong {
         box-shadow: none;
     }
+
+    .content-container {
+        align-items: stretch;
+        gap: var(--space-md);
+        padding: calc(var(--space-2xl) + 60px) var(--space-sm) var(--space-lg);
+    }
+
+    .profile-card, 
+    .bio-cards {
+        width: 100% !important;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .bio-cards {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .bio-card {
+        width: 100%;
+        margin: 0;
+        padding: var(--space-md);
+    }
+
+    .profile-social-links {
+        justify-content: center;
+        grid-template-columns: 1fr;
+    }
+
+    .profile-header-text,
+    .job-ready-description {
+        text-align: center;
+        padding: 0 var(--space-xs);
+    }
+    
+    .bio-card {
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .bio-card h3,
+    .bio-card p {
+        text-align: center;
+        width: 100%;
+    }
+
+    .content-container > * {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .profile-card {
+        padding: var(--space-md);
+        box-sizing: border-box;
+    }
+
+    .profile-header-text {
+        padding: 0 var(--space-2xs) !important;
+    }
+
+    .profile-tags {
+        justify-content: center;
+        margin: var(--space-sm) 0;
+    }
+
+    .bio-card {
+        width: 100% !important;
+        min-height: auto;
+        padding: var(--space-md);
+        box-sizing: border-box;
+    }
+
+    .bio-card h3,
+    .bio-card p {
+        width: 100%;
+        text-align: center;
+        padding: 0 var(--space-2xs);
+    }
+
+    .profile-social-links {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: var(--space-xs);
+        justify-items: center;
+    }
+
+    .job-ready-description {
+        margin: var(--space-md) auto;
+        max-width: 95%;
+    }
+
+    /* Force equal width for all direct children */
+    .content-container > * {
+        flex: 1 1 100%;
+    }
+
+    .profile-social-links a {
+        padding: 0.5rem 1rem;
+        gap: 0.75em;
+        margin: 0.25rem 0;
+    }
+    
+    .profile-social-links li {
+        padding: 0.25rem 0;
+    }
+    
+    .profile-social-links i {
+        margin-right: 0.5em;
+    }
 }
 
 .profile-card {
@@ -295,8 +524,8 @@ p {
 .profile-tag {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 1rem 1.5rem;
+    gap: 0.75em;
+    padding: 0.8rem 1.2rem;
     background: rgba(0, 230, 255, 0.1);
     border: 2px solid var(--term-cyan);
     border-radius: 16px;
@@ -309,4 +538,51 @@ p {
 .profile-tag i {
     font-size: 1.6rem;
     color: var(--term-cyan-bright);
+}
+
+body, h1, h2, h3, p, a, span, input, textarea, button {
+    color: #FFFFFF; /* Set all text to white */
+}
+
+/* Social links in profile card */
+.profile-social-links a {
+    gap: 0.75em;
+    padding: 0.6rem 1rem;
+}
+
+/* Contact items in sidebar */
+.contact-item {
+    gap: 0.8em;
+    padding: 0.9rem;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .profile-tag {
+        gap: 0.5em;
+        padding: 0.6rem 1rem;
+    }
+    
+    .profile-social-links a {
+        gap: 0.6em;
+        padding: 0.5rem 0.8rem;
+    }
+    
+    .contact-item {
+        gap: 0.6em;
+        padding: 0.7rem;
+    }
+}
+
+/* Hamburger menu button */
+.hamburger-menu {
+    gap: 0.6em;
+}
+
+/* Ensure content stays above particles */
+.content-container,
+.profile-card,
+.bio-cards {
+    position: relative;
+    z-index: var(--z-content);
 }

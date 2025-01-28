@@ -2,57 +2,49 @@
 particlesJS("particles-js", {
   "particles": {
     "number": {
-      "value": 50,
+      "value": 300,
       "density": {
         "enable": true,
-        "value_area": 800
+        "value_area": 400
       }
     },
     "color": {
-      "value": "#00E6FF"
+      "value": ["#00FFFF", "#FF00C1", "#9400D3"]
     },
     "shape": {
       "type": "circle"
     },
     "opacity": {
-      "value": 0.3,
-      "random": true,
-      "anim": {
-        "enable": true,
-        "speed": 0.5,
-        "opacity_min": 0.1,
-        "sync": false
-      }
+      "value": 0.7,
+      "random": true
     },
     "size": {
-      "value": 2,
-      "random": true,
-      "anim": {
-        "enable": true,
-        "speed": 1,
-        "size_min": 0.1,
-        "sync": false
-      }
+      "value": 3,
+      "random": true
     },
     "line_linked": {
       "enable": true,
-      "distance": 100,
-      "color": "#00E6FF",
-      "opacity": 0.2,
-      "width": 1
+      "distance": 150,
+      "color": "#00FFFF",
+      "opacity": 0.4,
+      "width": 1,
+      "shadow": {
+        "enable": true,
+        "color": "#FF00C1",
+        "blur": 5
+      }
     },
     "move": {
       "enable": true,
-      "speed": 1,
+      "speed": 2,
       "direction": "none",
       "random": true,
       "straight": false,
-      "out_mode": "bounce",
-      "bounce": false,
+      "out_mode": "out",
       "attract": {
-        "enable": true,
-        "rotateX": 600,
-        "rotateY": 1200
+        "enable": false,
+        "rotateX": 0,
+        "rotateY": 0
       }
     }
   },
@@ -60,11 +52,11 @@ particlesJS("particles-js", {
     "detect_on": "canvas",
     "events": {
       "onhover": {
-        "enable": window.matchMedia("(min-width: 768px)").matches,
-        "mode": "grab"
+        "enable": true,
+        "mode": "repulse"
       },
       "onclick": {
-        "enable": window.matchMedia("(min-width: 768px)").matches,
+        "enable": true,
         "mode": "push"
       },
       "resize": true
@@ -304,74 +296,105 @@ document.addEventListener('DOMContentLoaded', () => {
     const carousel = new ProjectCarousel();
 });
 
-// Unified typing effect function
-function typeText(element, text, speed = 50, startDelay = 0) {
+// Update the typing function to maintain word order
+const typeText = (element, text, speed = 20) => {
     return new Promise(resolve => {
-        setTimeout(() => {
-            let index = 0;
-            element.textContent = '';
-            element.style.visibility = 'visible';
-            
-            function type() {
-                if (index < text.length) {
-                    element.textContent += text.charAt(index);
-                    index++;
-                    setTimeout(type, speed);
-                } else {
-                    resolve();
+        element.innerHTML = '';
+        let index = 0;
+        let currentWord = '';
+        let inTag = false;
+
+        const type = () => {
+            if (index < text.length) {
+                const char = text[index++];
+                
+                // Handle HTML tags separately
+                if (char === '<') inTag = true;
+                if (char === '>') {
+                    inTag = false;
+                    element.innerHTML += char;
+                    return requestAnimationFrame(type);
                 }
+                
+                if (inTag) {
+                    element.innerHTML += char;
+                    return requestAnimationFrame(type);
+                }
+
+                // Add words in sequence
+                currentWord += char;
+                
+                // Add whole word at once when reaching space or punctuation
+                if (/[\s.,!?]/.test(char)) {
+                    element.innerHTML += currentWord;
+                    currentWord = '';
+                setTimeout(type, speed);
+            } else {
+                    requestAnimationFrame(type);
+                }
+            } else {
+                // Add remaining characters
+                if (currentWord.length > 0) {
+                    element.innerHTML += currentWord;
+                }
+                element.setAttribute('data-typing-complete', 'true');
+                resolve();
             }
-            type();
-        }, startDelay);
+        };
+
+        requestAnimationFrame(type);
     });
-}
+};
 
-// Unified function to initialize all typing animations
+// Define the sequence of elements to animate
+const TYPING_SEQUENCE = [
+    '.profile-header-text h1',
+    '.profile-header-text h2',
+    '.job-ready-description p',
+    '.bio-card:nth-child(1) h3',
+    '.bio-card:nth-child(1) p',
+    '.bio-card:nth-child(2) h3',
+    '.bio-card:nth-child(2) p',
+    '.bio-card:nth-child(3) h3',
+    '.bio-card:nth-child(3) p'
+];
+
+// Initialize typing effects in sequence
 async function initializeTypingEffects() {
-    // Collect all elements that need typing effect
-    const elementsToType = [
-        // Profile section
-        { element: document.querySelector('.profile-card h1'), text: 'Michael Preciado' },
-        { element: document.querySelector('.profile-card h2'), text: 'Software & AI Solutions' },
-        { element: document.querySelector('.job-ready-description p'), 
-          text: 'Passionate about leveraging technology to solve real-world problems. Seeking opportunities to contribute to innovative projects and grow within a dynamic team.' },
-        
-        // Projects section
-        { element: document.querySelector('.projects-header h1'), text: 'Projects' },
-        ...Array.from(document.querySelectorAll('.project-card p')).map(el => ({
-            element: el,
-            text: el.textContent
-        })),
-        
-        // Bio cards
-        ...Array.from(document.querySelectorAll('.bio-card h3, .bio-card p')).map(el => ({
-            element: el,
-            text: el.textContent
-        }))
-    ];
-
-    // Clear all elements first
-    elementsToType.forEach(item => {
-        if (item.element) {
-            item.element.textContent = '';
-            item.element.style.visibility = 'visible';
+    console.log('Initializing typing effects...');
+    // Ensure all elements are visible initially
+    TYPING_SEQUENCE.forEach(selector => {
+        const element = document.querySelector(selector);
+        if (element) {
+            console.log(`Preparing element: ${selector}`);
+            element.style.visibility = 'visible';
+            element.style.opacity = '1';
         }
     });
-
-    // Type all elements simultaneously with a reasonable speed
-    await Promise.all(
-        elementsToType.map(item => typeText(item.element, item.text, 50)) // Set speed to 50ms
-    );
-
-    // After text is typed, fade in all tags immediately
-    const tags = document.querySelectorAll('.profile-tag');
-    tags.forEach(tag => {
-        tag.style.opacity = '1';
-        tag.style.transform = 'translateY(0)';
-        tag.style.transition = 'all 0.1s ease'; // Faster transition
-        tag.style.display = 'flex';
-    });
+    
+    // Type each element in sequence
+    for (const selector of TYPING_SEQUENCE) {
+        const element = document.querySelector(selector);
+        if (element && element.dataset.typeEffect) {
+            console.log(`Typing text for element: ${selector}`);
+            // Type the text
+            await typeText(element, element.dataset.typeEffect);
+            
+            // Add small delay between elements
+            await new Promise(resolve => setTimeout(resolve, 100));
+        }
+    }
+    console.log('Typing effects completed.');
 }
+
+// Ensure proper initialization
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(initializeTypingEffects, 500);
+    } else {
+        document.addEventListener('DOMContentLoaded', initializeTypingEffects);
+    }
+});
 
 // Optimized animation handling with IntersectionObserver
 document.addEventListener('DOMContentLoaded', () => {
@@ -497,27 +520,6 @@ const initResponsiveNav = () => {
 };
 
 // Terminal Typing Animation
-function typeText(element, text, speed = 50, startDelay = 0) {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            let index = 0;
-            element.textContent = '';
-            element.style.visibility = 'visible';
-            
-            function type() {
-                if (index < text.length) {
-                    element.textContent += text.charAt(index);
-                    index++;
-                    setTimeout(type, speed);
-                } else {
-                    resolve();
-                }
-            }
-            type();
-        }, startDelay);
-    });
-}
-
 async function initTerminalAnimation() {
     // Add terminal scan effect
     const scanLine = document.createElement('div');
@@ -617,5 +619,87 @@ document.addEventListener('DOMContentLoaded', function() {
 
     nameElement.textContent = '';
     typeLetter();
+});
+
+// Initialize particles with optimized settings
+function initParticles() {
+    particlesJS("particles-js", {
+        particles: {
+            number: {
+                value: window.innerWidth < 768 ? 150 : 250,
+                density: { enable: true, value_area: 400 }
+            },
+            color: { value: "#00E6FF" },
+            shape: { type: "circle" },
+            opacity: {
+                value: 0.3,
+                random: true,
+                anim: { enable: true, speed: 0.5, opacity_min: 0.1 }
+            },
+            size: {
+                value: 2,
+                random: true,
+                anim: { enable: true, speed: 1, size_min: 0.1 }
+            },
+            line_linked: {
+                enable: true,
+                distance: 100,
+                color: "#00E6FF",
+                opacity: 0.2,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 1,
+                direction: "none",
+                random: true,
+                out_mode: "bounce"
+            }
+        },
+        interactivity: {
+            detect_on: "canvas",
+            events: {
+                onhover: { enable: true, mode: "grab" },
+                onclick: { enable: true, mode: "push" },
+                resize: true
+            }
+        },
+        retina_detect: true
+    });
+}
+
+// Call on load and resize
+window.addEventListener('load', initParticles);
+window.addEventListener('resize', () => {
+    if(window.pJSDom[0]) window.pJSDom[0].pJS.fn.vendors.destroy();
+    initParticles();
+});
+
+// Terminal typing effect
+function initTerminalAnimations() {
+  document.querySelectorAll('[data-terminal]').forEach(el => {
+    const text = el.dataset.terminal;
+    el.innerHTML = '';
+    
+    text.split('').forEach((char, i) => {
+      const span = document.createElement('span');
+      span.textContent = char;
+      span.style.animation = `terminalGlow 0.5s ${i * 0.05}s both`;
+      el.appendChild(span);
+    });
+  });
+}
+
+// Initialize animations
+document.addEventListener('DOMContentLoaded', () => {
+  initTerminalAnimations();
+  
+  // Add neural connection animation
+  const paths = document.querySelectorAll('.neural-connection');
+  paths.forEach(path => {
+    const length = path.getTotalLength();
+    path.style.strokeDasharray = length;
+    path.style.strokeDashoffset = length;
+  });
 });
 

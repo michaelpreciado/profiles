@@ -11,12 +11,10 @@
     
     @media (min-width: 768px) {
         padding: calc(var(--space-3xl) + 160px) var(--space-xl) var(--space-2xl);
-        gap: var(--space-2xl);
     }
     
     @media (min-width: 1024px) {
         padding: calc(var(--space-3xl) + 200px) var(--space-2xl) var(--space-3xl);
-        gap: var(--space-3xl);
     }
 }
 
@@ -54,19 +52,18 @@
     border-radius: 12px;
     overflow: hidden;
     position: relative;
-    transition: var(--transition-normal);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
     display: flex;
     flex-direction: column;
     height: 100%;
     min-height: 350px;
     max-width: 400px;
     margin: 0 auto;
-}
-
-.project-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    border-color: var(--term-cyan);
-    box-shadow: var(--term-glow-strong);
+    
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--term-glow-strong);
+    }
 }
 
 .project-image {
@@ -585,8 +582,7 @@
         transition: none !important;
     }
     
-    .project-card::after,
-    .project-card::before {
+    .project-card::after {
         animation: none !important;
     }
 }
@@ -691,4 +687,4 @@
 /* Remove footer styles */
 .mp-footer, .signature {
     display: none;
-} 
+}

@@ -72,21 +72,21 @@
     box-shadow: 0 0 20px var(--term-cyan);
 }
 
-/* Sidebar Styles */
+/* Enhanced Sidebar Styles */
 .sidebar {
     position: fixed;
     top: 0;
     right: -100%;
     height: 100vh;
-    width: 85%;
-    max-width: 300px;
+    width: 100%;
+    max-width: 400px;
     background: rgba(0, 18, 21, 0.95);
     border-left: 2px solid var(--term-cyan);
     transform: translateX(100%);
     transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
     z-index: 999;
     box-shadow: var(--term-glow);
-    padding: 1.5rem;
+    padding: 2rem;
     backdrop-filter: blur(10px);
     overflow-y: auto;
     will-change: transform;

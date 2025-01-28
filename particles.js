@@ -1,47 +1,60 @@
+const particleDensity = window.innerWidth < 768 ? 30 : 80;
+
 particlesJS("particles-js", {
   particles: {
     number: {
-      value: 80,
+      value: window.innerWidth < 768 ? 40 : 100,
       density: {
         enable: true,
-        value_area: 800
+        value_area: window.innerWidth < 768 ? 600 : 1000
       }
     },
     color: {
-      value: "#00E6E6"
+      value: "#00FFFF"
     },
     shape: {
       type: "circle"
     },
     opacity: {
-      value: 0.5,
-      random: false,
+      value: 0.7,
+      random: true,
       anim: {
-        enable: false
+        enable: true,
+        speed: 0.5,
+        opacity_min: 0.3,
+        sync: false
       }
     },
     size: {
-      value: 2,
+      value: 3,
       random: true,
       anim: {
-        enable: false
+        enable: true,
+        speed: 1,
+        size_min: 1,
+        sync: false
       }
     },
     line_linked: {
       enable: true,
-      distance: 150,
-      color: "#00E6E6",
-      opacity: 0.2,
-      width: 1
+      distance: 120,
+      color: "#00FFFF",
+      opacity: 0.4,
+      width: 1.2
     },
     move: {
       enable: true,
-      speed: 2,
+      speed: 1.5,
       direction: "none",
-      random: false,
+      random: true,
       straight: false,
-      out_mode: "out",
-      bounce: false
+      out_mode: "bounce",
+      bounce: false,
+      attract: {
+        enable: true,
+        rotateX: 600,
+        rotateY: 1200
+      }
     }
   },
   interactivity: {

@@ -7,17 +7,38 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Michael Preciado - Software Developer</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="header.css" as="style">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+          integrity="sha512-..." 
+          crossorigin="anonymous" 
+          referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="home.css">
+    <style>
+        .job-ready-description [data-type-effect] {
+            min-height: 6em;  /* Adjust based on your content */
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .type-cursor {
+            display: inline-block;
+            width: 3px;
+            background: #fff;
+            margin-left: 2px;
+            animation: blink 1s infinite;
+        }
+    </style>
 </head>
 
 <body>
     <header class="main-header">
         <div class="header-content">
-            <button class="hamburger-menu" onclick="toggleSidebar()" aria-label="Menu" style="min-width: 44px; min-height: 44px; padding: 12px;">
+            <button class="hamburger-menu" onclick="toggleSidebar()" aria-label="Menu">
                 <i class="fas fa-address-card"></i>
                 <span>Contact</span>
             </button>
@@ -32,33 +53,9 @@
             <div class="contact-section">
                 <h2>Let's Connect!</h2>
                 <div class="contact-info">
-                    <a href="mailto:mpreciado1997@gmail.com" class="contact-item">
+                    <a href="mailto:michael.preciado1995@gmail.com" class="contact-item">
                         <i class="fas fa-envelope"></i>
                         <span>mpreciado1997@gmail.com</span>
-                    </a>
-                    <a href="https://github.com/michaelpreciado?tab=repositories" target="_blank" class="contact-item">
-                        <i class="fab fa-github"></i>
-                        <span>GitHub</span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/michael-preciado-74959b227/" target="_blank" class="contact-item">
-                        <i class="fab fa-linkedin"></i>
-                        <span>LinkedIn</span>
-                    </a>
-                    <a href="https://x.com/mpdollars" target="_blank" class="contact-item">
-                        <i class="fab fa-x-twitter"></i>
-                        <span>X (Twitter)</span>
-                    </a>
-                    <a href="https://www.instagram.com/michaelpreciado/" target="_blank" class="contact-item">
-                        <i class="fab fa-instagram"></i>
-                        <span>Instagram</span>
-                    </a>
-                    <a href="https://www.tiktok.com/@.michael.preciado" target="_blank" class="contact-item">
-                        <i class="fab fa-tiktok"></i>
-                        <span>TikTok</span>
-                    </a>
-                    <a href="https://printsbypreciado.etsy.com" target="_blank" class="contact-item">
-                        <i class="fab fa-etsy"></i>
-                        <span>Etsy</span>
                     </a>
                 </div>
                 <div class="location-info">
@@ -75,8 +72,8 @@
                     <img src="public/blue.jpeg" alt="Michael Preciado - Software Developer">
                 </div>
                 <div class="profile-header-text">
-                    <h1>Michael<br class="mobile-break">Preciado</h1>
-                    <h2>Software & AI Solutions</h2>
+                    <h1 data-type-effect="Michael Preciado"></h1>
+                    <h2 data-type-effect="Software & AI Solutions"></h2>
                     <div class="profile-tags">
                         <span class="profile-tag">
                             <i class="fas fa-fighter-jet"></i>
@@ -100,14 +97,15 @@
                         </span>
                     </div>
                     <div class="job-ready-description">
-                        <p>Passionate about leveraging technology to solve real-world problems. Seeking opportunities to contribute to innovative projects and grow within a dynamic team.</p>
+                        <p data-type-effect="Passionate about leveraging technology to solve real-world problems. Seeking opportunities to contribute to innovative projects and grow within a dynamic team."></p>
                     </div>
+                    <div class="type-cursor"></div>
                 </div>
             </header>
 
             <ul class="profile-social-links">
                 <li>
-                    <a href="https://twitter.com/MichaelPreciad0" target="_blank" rel="noopener noreferrer">
+                    <a href="https://x.com/mpdollars" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-x-twitter"></i>
                         <span>X</span>
                     </a>
@@ -119,19 +117,19 @@
                     </a>
                 </li>
                 <li>
-                    <a href="https://www.linkedin.com/in/michael-preciado/" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.linkedin.com/feed/" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-linkedin"></i>
                         <span>LinkedIn</span>
                     </a>
                 </li>
                 <li>
-                    <a href="https://www.instagram.com/michaelpreciado/" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.instagram.com/michael.preciado/" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-instagram"></i>
                         <span>Instagram</span>
                     </a>
                 </li>
                 <li>
-                    <a href="https://www.tiktok.com/@michaelpreciado" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.tiktok.com/@.michael.preciado" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-tiktok"></i>
                         <span>TikTok</span>
                     </a>
@@ -154,20 +152,20 @@
         <div class="bio-cards">
             <div class="bio-card">
                 <i class="bio-card-icon fas fa-terminal"></i>
-                <h3>Self-Taught Software Developer</h3>
-                <p>Experienced in full-stack development utilizing Python, Java, and SQL. Proficient in modern web technologies, RESTful APIs, and cloud services. Strong focus on scalable and efficient solutions.</p>
+                <h3 data-type-effect="Self-Taught Software Developer"></h3>
+                <p data-type-effect="Experienced in full-stack development utilizing Python, Java, and SQL. Proficient in modern web technologies, RESTful APIs, and cloud services. Strong focus on scalable and efficient solutions."></p>
             </div>
             
             <div class="bio-card">
                 <i class="bio-card-icon fas fa-microchip"></i>
-                <h3>AI & Machine Learning</h3>
-                <p>Specialized in AI integration and automation for business process optimization. Experienced with machine learning models, data analysis, and implementing AI-driven solutions.</p>
+                <h3 data-type-effect="AI & Machine Learning"></h3>
+                <p data-type-effect="Specialized in AI integration and automation for business process optimization. Experienced with machine learning models, data analysis, and implementing AI-driven solutions."></p>
             </div>
             
             <div class="bio-card">
                 <i class="bio-card-icon fas fa-server"></i>
-                <h3>IT Systems Specialist</h3>
-                <p>Expert in network infrastructure, system administration, and cybersecurity. Skilled in hardware diagnostics, performance optimization, and implementing robust security measures.</p>
+                <h3 data-type-effect="IT Systems Specialist"></h3>
+                <p data-type-effect="Expert in network infrastructure, system administration, and cybersecurity. Skilled in hardware diagnostics, performance optimization, and implementing robust security measures."></p>
             </div>
         </div>
     </main>
