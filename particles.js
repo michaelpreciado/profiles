@@ -3,10 +3,10 @@ const particleDensity = window.innerWidth < 768 ? 30 : 80;
 particlesJS("particles-js", {
   particles: {
     number: {
-      value: window.innerWidth < 768 ? 40 : 100,
+      value: window.innerWidth < 768 ? 30 : 60,
       density: {
         enable: true,
-        value_area: window.innerWidth < 768 ? 600 : 1000
+        value_area: window.innerWidth < 768 ? 800 : 1200
       }
     },
     color: {
@@ -26,7 +26,7 @@ particlesJS("particles-js", {
       }
     },
     size: {
-      value: 3,
+      value: 2,
       random: true,
       anim: {
         enable: true,
@@ -43,18 +43,8 @@ particlesJS("particles-js", {
       width: 1.2
     },
     move: {
-      enable: true,
-      speed: 1.5,
-      direction: "none",
-      random: true,
-      straight: false,
-      out_mode: "bounce",
-      bounce: false,
-      attract: {
-        enable: true,
-        rotateX: 600,
-        rotateY: 1200
-      }
+      speed: window.innerWidth < 768 ? 0 : 1.2,
+      enable: !window.matchMedia("(max-width: 768px)").matches
     }
   },
   interactivity: {

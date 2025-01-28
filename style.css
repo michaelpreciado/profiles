@@ -55,7 +55,6 @@
 
 /* Enhanced Base Layout */
 body {
-    background: var(--term-bg);
     font-family: var(--font-mono);
     color: var(--term-cyan);
     min-height: 100vh;
@@ -70,6 +69,8 @@ body {
     isolation: isolate;
     letter-spacing: 0.02em;
     line-height: 1.6;
+    padding-top: 80px; /* Space for fixed header */
+    background: var(--term-bg); /* Fallback for mobile */
 }
 
 /* Enhanced Typography */
@@ -108,12 +109,15 @@ p {
     width: 100%;
     max-width: var(--content-width-sm);
     margin: 0 auto;
-    padding: calc(var(--space-2xl) + 80px) var(--space-md) var(--space-xl);
+    padding: var(--space-xl) var(--space-md) var(--space-xl);
     display: flex;
     flex-direction: column;
     gap: var(--space-xl);
     position: relative;
     z-index: var(--z-content);
+    background: rgba(0, 18, 21, 0.6) !important;
+    backdrop-filter: blur(4px);
+    border: 1px solid var(--term-cyan-dark);
     
     @media (min-width: 768px) {
         max-width: var(--content-width-md);
@@ -215,10 +219,13 @@ p {
 
 /* Neural network particle connections */
 #particles-js {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: var(--z-background);
+    background: var(--term-bg) !important;
 }
 
 .neural-connection {
@@ -506,6 +513,9 @@ body::after {
     padding: 1rem;
     margin: 0 auto;
     max-width: 600px;
+    background: rgba(0, 18, 21, 0.4);
+    backdrop-filter: blur(2px);
+    border: 1px solid var(--term-cyan-dark);
 }
 
 .profile-header-text {
@@ -585,4 +595,26 @@ body, h1, h2, h3, p, a, span, input, textarea, button {
 .bio-cards {
     position: relative;
     z-index: var(--z-content);
+}
+
+/* Add to top of CSS */
+html {
+    min-height: 100vh;
+}
+
+/* Adjust header height */
+.main-header {
+    height: 80px; /* Fixed header height */
+}
+
+/* Ensure particles stay behind everything */
+#particles-js {
+    z-index: var(--z-background); /* Should be -1 */
+}
+
+/* Fix content layering */
+.content-container,
+.projects-container {
+    position: relative;
+    z-index: var(--z-content); /* Should be 1 */
 }

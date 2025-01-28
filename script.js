@@ -2,10 +2,10 @@
 particlesJS("particles-js", {
   "particles": {
     "number": {
-      "value": 300,
+      "value": 150,
       "density": {
         "enable": true,
-        "value_area": 400
+        "value_area": 800
       }
     },
     "color": {
@@ -15,18 +15,18 @@ particlesJS("particles-js", {
       "type": "circle"
     },
     "opacity": {
-      "value": 0.7,
+      "value": 0.5,
       "random": true
     },
     "size": {
-      "value": 3,
+      "value": 2,
       "random": true
     },
     "line_linked": {
       "enable": true,
       "distance": 150,
       "color": "#00FFFF",
-      "opacity": 0.4,
+      "opacity": 0.25,
       "width": 1,
       "shadow": {
         "enable": true,
@@ -36,7 +36,7 @@ particlesJS("particles-js", {
     },
     "move": {
       "enable": true,
-      "speed": 2,
+      "speed": 1.5,
       "direction": "none",
       "random": true,
       "straight": false,
@@ -297,53 +297,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Update the typing function to maintain word order
-const typeText = (element, text, speed = 20) => {
-    return new Promise(resolve => {
-        element.innerHTML = '';
-        let index = 0;
-        let currentWord = '';
-        let inTag = false;
-
-        const type = () => {
-            if (index < text.length) {
-                const char = text[index++];
-                
-                // Handle HTML tags separately
-                if (char === '<') inTag = true;
-                if (char === '>') {
-                    inTag = false;
-                    element.innerHTML += char;
-                    return requestAnimationFrame(type);
-                }
-                
-                if (inTag) {
-                    element.innerHTML += char;
-                    return requestAnimationFrame(type);
-                }
-
-                // Add words in sequence
-                currentWord += char;
-                
-                // Add whole word at once when reaching space or punctuation
-                if (/[\s.,!?]/.test(char)) {
-                    element.innerHTML += currentWord;
-                    currentWord = '';
-                setTimeout(type, speed);
-            } else {
-                    requestAnimationFrame(type);
-                }
-            } else {
-                // Add remaining characters
-                if (currentWord.length > 0) {
-                    element.innerHTML += currentWord;
-                }
-                element.setAttribute('data-typing-complete', 'true');
-                resolve();
-            }
-        };
-
-        requestAnimationFrame(type);
-    });
+const typeText = (element, text) => {
+    element.textContent = text;
+    return Promise.resolve();
 };
 
 // Define the sequence of elements to animate
@@ -444,10 +400,19 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollTimeout = window.requestAnimationFrame(() => {
             const scrolled = window.scrollY;
             const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-            const opacity = Math.max(0.2, 1 - (scrolled / maxScroll));
             const particles = document.getElementById('particles-js');
+            
             if (particles) {
-                particles.style.opacity = opacity;
+                // Only fade particle elements, not the background
+                const canvas = particles.querySelector('canvas');
+                if (canvas) {
+                    const opacity = Math.max(0.3, 1 - (scrolled / maxScroll));
+                    canvas.style.opacity = opacity;
+                }
+                
+                // Maintain solid background
+                particles.style.background = 'var(--term-bg)';
+                particles.style.opacity = 1;
             }
         });
     };
@@ -562,7 +527,7 @@ async function initTerminalAnimation() {
         }, delay);
     }
     
-    // Randomly trigger glitch effects
+    // Randomly trigger glitches
     function startRandomGlitches() {
         textElements.forEach(element => {
             setInterval(() => {
@@ -626,8 +591,8 @@ function initParticles() {
     particlesJS("particles-js", {
         particles: {
             number: {
-                value: window.innerWidth < 768 ? 150 : 250,
-                density: { enable: true, value_area: 400 }
+                value: window.innerWidth < 768 ? 80 : 120,
+                density: { enable: true, value_area: 600 }
             },
             color: { value: "#00E6FF" },
             shape: { type: "circle" },

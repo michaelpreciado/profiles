@@ -18,11 +18,11 @@
 <body>
     <header class="main-header">
         <div class="header-content">
-            <a href="/" class="back-to-home">
+            <a href="/" class="back-to-home" aria-label="Return to home page">
                 <i class="fa fa-chevron-left"></i>
-                <span>Home</span>
+                <span class="mobile-hidden">Home</span>
             </a>
-            <button class="hamburger-menu" onclick="toggleSidebar()">
+            <button class="hamburger-menu" onclick="toggleSidebar()" aria-label="Contact menu">
                 <i class="fa fa-address-card"></i>
                 <span>Contact</span>
             </button>
@@ -188,6 +188,17 @@
             document.getElementById('sidebar').classList.toggle('active');
             document.body.classList.toggle('sidebar-open');
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize carousel
+            const carousel = new ProjectCarousel();
+            
+            // Re-initialize particles with same config
+            particlesJS('particles-js', {/* Same config as home page */});
+            
+            // Initialize typing effects
+            initializeTypingEffects();
+        });
     </script>
 </body>
 

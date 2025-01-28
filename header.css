@@ -59,6 +59,8 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    z-index: 1002;
+    position: relative;
 }
 
 .hamburger-menu span {
@@ -78,14 +80,12 @@
     top: 0;
     right: -100%;
     height: 100vh;
-    width: 100%;
-    max-width: 400px;
+    width: min(90vw, 400px);
+    z-index: 1001;
+    transform: translateX(100%);
+    transition: transform var(--transition-normal);
     background: rgba(0, 18, 21, 0.95);
     border-left: 2px solid var(--term-cyan);
-    transform: translateX(100%);
-    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    z-index: 999;
-    box-shadow: var(--term-glow);
     padding: 2rem;
     backdrop-filter: blur(10px);
     overflow-y: auto;
@@ -182,6 +182,12 @@
 
     .contact-item {
         padding: 0.8rem;
+    }
+
+    .hamburger-menu {
+        padding: 1rem;
+        min-width: 44px;
+        min-height: 44px;
     }
 }
 

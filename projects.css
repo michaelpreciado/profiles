@@ -1,3 +1,18 @@
+/* Add to top of file */
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.projects-container {
+    position: relative;
+    z-index: 1;
+}
+
 /* Projects Container */
 .projects-container {
     width: 100%;
