@@ -60,8 +60,18 @@ document.querySelector('.back-to-home')?.addEventListener('click', (e) => {
     }
 });
 
-// Update event listeners for mobile
-document.querySelectorAll('.back-to-home, .hamburger-menu').forEach(button => {
+// Update event listeners to separate home button and menu
+document.querySelectorAll('.hamburger-menu').forEach(button => {
     button.addEventListener('click', toggleSidebar);
-    button.addEventListener('touchstart', toggleSidebar, { passive: true });
+    button.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        toggleSidebar();
+    }, { passive: false });
+});
+
+// Let the back-to-home link work normally
+document.querySelectorAll('.back-to-home').forEach(link => {
+    link.addEventListener('touchstart', (e) => {
+        // Allow default link behavior
+    }, { passive: true });
 }); 

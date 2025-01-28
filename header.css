@@ -309,4 +309,24 @@ body.sidebar-open {
         background: rgba(0, 18, 21, 0.85);
         backdrop-filter: blur(10px);
     }
+}
+
+.back-to-home {
+    /* Ensure link remains clickable */
+    position: relative;
+    z-index: 1002;
+    text-decoration: none !important;
+}
+
+.back-to-home span {
+    display: inline !important; /* Force show text label */
+}
+
+@media (max-width: 480px) {
+    .back-to-home span {
+        display: none !important; /* Hide text on smallest screens */
+    }
+    .back-to-home i {
+        margin-right: 0;
+    }
 } 
