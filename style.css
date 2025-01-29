@@ -55,7 +55,11 @@
 
 /* Enhanced Base Layout */
 body {
-    font-family: var(--font-mono);
+    font-family: 'Space Mono', 'Fira Code', 'Consolas', monospace;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'kern' 1, 'liga' 1;
     color: var(--term-cyan);
     min-height: 100vh;
     margin: 0;
@@ -624,3 +628,42 @@ html {
     position: relative;
     z-index: var(--z-content); /* Should be 1 */
 }
+
+/* Cyberpunk Headings */
+h1, h2, h3 {
+    font-family: 'Orbitron', 'Arial Narrow', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-shadow: 
+        0 0 8px rgba(0, 230, 255, 0.4),
+        0 0 2px rgba(255, 255, 255, 0.8);
+    -webkit-text-stroke: 0.5px var(--term-cyan-bright);
+}
+
+/* Terminal-style Text */
+.profile-header-text,
+.bio-card p,
+.project-description {
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 400;
+    line-height: 1.8;
+    letter-spacing: -0.02em;
+    text-shadow: 0 0 4px rgba(0, 230, 255, 0.2);
+}
+
+/* Code Elements */
+code, pre {
+    font-family: 'Fira Code', monospace;
+    font-variant-ligatures: contextual;
+    font-feature-settings: 'calt' 1, 'ss01' 1;
+}
+
+/* Dynamic Font Smoothing */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
+    body {
+        -webkit-font-smoothing: subpixel-antialiased;
+    }
+}
+
+/* Add to HTML head */
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Source+Code+Pro&display=swap" rel="stylesheet">

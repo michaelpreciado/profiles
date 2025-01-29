@@ -1,0 +1,124 @@
+@keyframes textGlitch {
+    0% { 
+        text-shadow: 0 0 8px var(--term-cyan);
+        clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+    }
+    50% { 
+        text-shadow: 2px 2px 8px var(--term-cyan-dark);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+    98% {  /* Stop before 100% to complete typing */
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+    100% {
+        text-shadow: -2px -2px 8px var(--term-cyan-bright);
+        opacity: 0; /* Fade out cursor */
+    }
+}
+
+/* Unified Typing Effect */
+@keyframes typeEffect {
+    0% { 
+        width: 0;
+        opacity: 0;
+    }
+    1% {
+        opacity: 1;
+    }
+    100% {
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+/* Glitch Effect for Lines */
+@keyframes lineGlitch {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    2% {
+        transform: translateX(2px);
+        opacity: 0.8;
+    }
+    4% {
+        transform: translateX(-2px);
+    }
+    6% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Apply to All Cyan Elements */
+[class*="term-cyan"], 
+.border-cyan,
+.glow-cyan {
+    animation: lineGlitch 6s infinite;
+    position: relative;
+}
+
+/* Profile Text Animation */
+.profile-header-text h1 {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typeEffect 3s steps(40) forwards,
+               textGlitch 2.5s infinite 3s;
+}
+
+/* Bio Card Animation */
+.bio-card p {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typeEffect 2.5s steps(30) forwards,
+               textGlitch 2s infinite 2.5s;
+}
+
+/* Delay Individual Elements */
+.bio-card:nth-child(2) p {
+    animation-delay: 0.5s, 3s;
+}
+
+.bio-card:nth-child(3) p {
+    animation-delay: 1s, 3.5s;
+}
+
+.type-cursor {
+    position: absolute;
+    right: 0;
+    animation: blink 1s infinite;
+    opacity: 0; /* Start hidden */
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0 }
+    50% { opacity: 1 }
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: calc(var(--font-size-md) * 0.9);
+        line-height: 1.6;
+    }
+    
+    h1 {
+        font-size: calc(var(--font-size-2xl) * 0.85);
+        -webkit-text-stroke: 0.3px;
+    }
+    
+    .profile-header-text {
+        letter-spacing: -0.01em;
+    }
+}
+
+/* Force subpixel rendering in dark mode */
+@media (prefers-color-scheme: dark) {
+    body {
+        -webkit-font-smoothing: auto;
+    }
+} 

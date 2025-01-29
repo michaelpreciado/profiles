@@ -668,3 +668,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// Add random glitch triggers
+setInterval(() => {
+    const glitchElements = document.querySelectorAll('[class*="cyan"]');
+    glitchElements.forEach(el => {
+        el.style.animation = 'lineGlitch 0.8s';
+        setTimeout(() => {
+            el.style.animation = 'lineGlitch 6s infinite';
+        }, 800);
+    });
+}, 15000); // Trigger every 15 seconds
+
+setInterval(() => {
+    document.querySelectorAll('.dev-placeholder').forEach(placeholder => {
+        placeholder.style.transform = `translateX(${Math.random() * 4 - 2}px)`;
+        setTimeout(() => {
+            placeholder.style.transform = 'translateX(0)';
+        }, 50);
+    });
+}, 5000);
+

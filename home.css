@@ -362,18 +362,12 @@
     }
 
     .bio-cards {
-        width: 100%;
-        padding: 0 var(--space-xs);
+        width: 92%;
         margin: var(--space-xl) auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
     }
 
     .bio-card {
-        width: 100%;
-        max-width: 300px;
-        margin: var(--space-sm) auto;
+        padding: var(--space-sm);
     }
 
     .bio-card h3 {
@@ -418,4 +412,8 @@
     padding-left: var(--space-md);
     padding-right: var(--space-md);
     box-sizing: border-box;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
 } 

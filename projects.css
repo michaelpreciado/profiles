@@ -82,16 +82,19 @@
 }
 
 .project-image {
-    width: 100%;
-    height: 180px;
-    overflow: hidden;
     position: relative;
+    overflow: hidden;
+    border-radius: 8px;
 }
 
 .project-image img {
     width: 100%;
-    height: 100%;
+    height: 100%; /* Changed from auto to fill container */
     object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid var(--term-cyan-dark);
+    display: block;
+    background: rgba(0, 230, 255, 0.1); /* Fallback color */
     transition: transform var(--transition-normal);
 }
 
@@ -702,4 +705,91 @@
 /* Remove footer styles */
 .mp-footer, .signature {
     display: none;
+}
+
+/* Development Placeholder */
+.dev-placeholder {
+    width: 100%;
+    height: 200px;
+    background: rgba(0, 18, 21, 0.3);
+    border: 2px dashed var(--term-cyan-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.dev-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 5px,
+        rgba(0, 230, 255, 0.05) 5px,
+        rgba(0, 230, 255, 0.05) 10px
+    );
+}
+
+.dev-placeholder i {
+    font-size: 2.5rem;
+    color: var(--term-cyan-dim);
+    text-shadow: var(--term-glow);
+    position: relative;
+    z-index: 1;
+}
+
+.dev-placeholder span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--term-cyan-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    position: relative;
+    z-index: 1;
+    background: rgba(0, 18, 21, 0.7);
+    padding: 0.3rem 0.8rem;
+    border-radius: 3px;
+    border: 1px solid var(--term-cyan-dark);
+}
+
+/* Add Animation */
+@keyframes placeholderScan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
+.dev-placeholder::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0, 230, 255, 0.05) 50%,
+        transparent 100%
+    );
+    animation: placeholderScan 4s linear infinite;
+}
+
+.cyberpunk-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border: 2px solid var(--term-cyan-dark);
+    border-radius: 8px;
+    box-shadow: var(--term-glow);
+    transition: transform 0.3s ease;
+}
+
+.cyberpunk-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(0, 230, 255, 0.4);
 }
