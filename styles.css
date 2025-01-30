@@ -253,6 +253,42 @@
     }
 }
 
+.profile-header-text h1 {
+    position: relative;
+    display: inline-block;
+    white-space: normal;
+    word-wrap: break-word;
+    margin-bottom: 0.5rem;
+}
+
+.profile-header-text h1::after {
+    content: '_';
+    position: relative;
+    display: inline-block;
+    color: var(--term-cyan-bright);
+    animation: blink 1s step-end infinite;
+    margin-left: 2px;
+    vertical-align: baseline;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .profile-header-text h1 {
+        font-size: 1.5rem;
+        line-height: 1.3;
+    }
+    
+    .profile-header-text h1::after {
+        bottom: 0;
+        margin-left: 1px;
+    }
+}
+
 .profile-image {
     grid-area: image;
     width: 70px; /* Reduced from 80px */

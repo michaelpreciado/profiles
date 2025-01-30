@@ -32,6 +32,72 @@
             margin-left: 2px;
             animation: blink 1s infinite;
         }
+
+        .contactButton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 12px 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        @media (min-width: 769px) {
+            .contactButton {
+                bottom: 40px;
+                right: 50%;
+                transform: translateX(50%);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contactButton {
+                padding: 10px 16px;
+                font-size: 14px;
+                right: 10px;
+                bottom: 10px;
+                border-radius: 24px;
+            }
+        }
+
+        /* Typing animation container */
+        .type-effect {
+            position: relative;
+            display: inline-block;
+            padding-right: 8px; /* Space for cursor */
+        }
+
+        .type-effect::after {
+            content: '|';
+            position: absolute;
+            right: 0;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0 }
+            50% { opacity: 1 }
+        }
+
+        /* Mobile-specific adjustments */
+        @media (max-width: 768px) {
+            .type-effect {
+                font-size: 1.1rem; /* Adjust based on your design */
+                line-height: 1.4;
+                padding-right: 6px;
+            }
+            
+            .type-effect::after {
+                right: -2px; /* Fine-tune cursor position */
+                font-size: 1.05rem;
+            }
+            
+            /* Ensure container has proper width */
+            .type-container {
+                width: 90% !important;
+                margin: 0 auto !important;
+            }
+        }
     </style>
 </head>
 

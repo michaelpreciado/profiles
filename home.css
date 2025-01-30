@@ -215,30 +215,34 @@
 /* Scanline Effects */
 .profile-card::before,
 .bio-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
     background: 
         linear-gradient(
-            transparent 50%,
-            rgba(0, 230, 255, 0.025) 50%
-        ),
-        radial-gradient(
-            circle at 50% 50%,
-            rgba(0, 230, 255, 0.05) 0%,
-            transparent 100%
+            transparent 90%,
+            rgba(0, 230, 255, 0.02) 10%
         );
-    background-size: 100% 4px, 100% 100%;
-    pointer-events: none;
-    opacity: 0.5;
-    z-index: 0;
-    mix-blend-mode: screen;
+    background-size: 100% 8px;
+    opacity: 0.2;
+    mix-blend-mode: soft-light;
 }
 
 .profile-card:hover::before,
 .bio-card:hover::before {
-    opacity: 0.7;
-    animation: scanEffect 8s linear infinite;
+    opacity: 0.3;
+    animation: none;
+}
+
+/* Simplify radial gradient */
+.profile-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at 50% 50%,
+        transparent 60%,
+        rgba(0, 230, 255, 0.02) 100%
+    );
+    pointer-events: none;
+    z-index: 0;
 }
 
 /* Signature */
