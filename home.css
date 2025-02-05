@@ -353,12 +353,13 @@
     }
 
     .profile-card {
-        margin-top: var(--space-sm);
-        padding-top: 0;
+        margin-top: calc(var(--space-md) + 40px);
+        width: 92%;
     }
 
     .profile-image {
-        margin-top: var(--space-xs);
+        width: 100px;
+        height: 100px;
     }
 
     .profile-header-text h1 {
@@ -402,10 +403,6 @@
 
     .profile-social-links i {
         font-size: calc(var(--font-size-md) * 1.35 * 0.8);
-    }
-
-    .content-container {
-        padding-top: var(--space-xs) !important;
     }
 }
 

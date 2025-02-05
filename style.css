@@ -429,8 +429,12 @@ body::after {
     }
     
     .content-container {
-        padding: var(--space-sm) calc(var(--space-sm) + 5px) var(--space-xs);
-        margin-top: -20px; /* Pull up content */
+        padding: var(--space-md);
+        width: calc(100% - 40px);
+        max-width: none;
+        margin: 0;
+        align-items: stretch;
+        gap: var(--space-md);
     }
 
     .profile-social-links {
@@ -530,10 +534,6 @@ body::after {
     #particles-js {
         display: none;
     }
-
-    .profile-card {
-        margin-top: var(--space-xs);
-    }
 }
 
 .profile-card {
@@ -632,7 +632,6 @@ html {
 /* Adjust header height */
 .main-header {
     height: 80px; /* Fixed header height */
-    min-height: 50px; /* Reduced from 60px */
 }
 
 /* Ensure particles stay behind everything */
