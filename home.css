@@ -10,6 +10,13 @@
     overflow: hidden;
     position: relative;
     transition: var(--transition-normal);
+    grid-template: 
+        "image" auto
+        "header" auto
+        "tags" auto
+        "social" auto / 1fr;
+    gap: var(--space-md);
+    padding: var(--space-md);
 }
 
 .profile-card header {
@@ -23,8 +30,8 @@
 }
 
 .profile-image {
-    width: 160px;
-    height: 160px;
+    width: clamp(100px, 25vw, 160px);
+    height: clamp(100px, 25vw, 160px);
     border-radius: 50%;
     overflow: hidden;
     border: 3px solid var(--term-cyan-dark);
@@ -39,9 +46,9 @@
 }
 
 .profile-header-text {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
+    order: 2;
+    text-align: center;
+    padding: var(--space-sm) 0;
 }
 
 .profile-header-text h1 {
@@ -84,6 +91,7 @@
 }
 
 .profile-tags {
+    order: 3;
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-xs);
@@ -117,6 +125,7 @@
 }
 
 .profile-social-links {
+    order: 4;
     list-style: none;
     padding: calc(var(--space-xs) * 0.8);
     margin: 0;
@@ -399,6 +408,22 @@
 
     .profile-social-links i {
         font-size: calc(var(--font-size-md) * 1.35 * 0.8);
+    }
+}
+
+@media (max-width: 480px) and (orientation: portrait) {
+    .profile-image {
+        width: 25vw;
+        height: 25vw;
+    }
+    
+    .profile-social-links a {
+        min-width: 28vw;
+        padding: 1.2rem;
+    }
+    
+    .bio-card {
+        margin-bottom: env(safe-area-inset-bottom);
     }
 }
 

@@ -13,23 +13,39 @@
     z-index: 1;
 }
 
-/* Projects Container */
+/* Mobile-first base styles */
 .projects-container {
     width: 100%;
-    max-width: calc(var(--content-width-lg) * 0.85);
-    margin: 0 auto;
-    padding: calc(var(--space-3xl) + 120px) var(--space-lg) calc(var(--space-xl) + 40px);
+    padding: var(--space-lg);
     display: flex;
     flex-direction: column;
-    gap: var(--space-lg);
-    position: relative;
-    
-    @media (min-width: 768px) {
-        padding: calc(var(--space-3xl) + 160px) var(--space-xl) var(--space-2xl);
+    gap: var(--space-md);
+}
+
+.project-card {
+    min-height: 280px;
+    background: rgba(0, 18, 21, 0.8);
+    border: 1px solid var(--term-cyan-dark);
+}
+
+/* Tablet+ */
+@media (min-width: 769px) {
+    .projects-container {
+        padding: var(--space-3xl) var(--space-lg);
+        max-width: var(--content-width-lg);
     }
     
-    @media (min-width: 1024px) {
-        padding: calc(var(--space-3xl) + 200px) var(--space-2xl) var(--space-3xl);
+    .project-card {
+        min-height: 350px;
+        max-width: 400px;
+    }
+}
+
+/* Desktop enhancements */
+@media (min-width: 1024px) and (hover: hover) {
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--term-glow-strong);
     }
 }
 
@@ -59,26 +75,6 @@
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--space-lg);
     width: 100%;
-}
-
-.project-card {
-    background: rgba(0, 18, 21, 0.7);
-    border: 2px solid var(--term-cyan-dark);
-    border-radius: 12px;
-    overflow: hidden;
-    position: relative;
-    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-height: 350px;
-    max-width: 400px;
-    margin: 0 auto;
-    
-    &:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--term-glow-strong);
-    }
 }
 
 .project-image {
@@ -792,4 +788,19 @@
 .cyberpunk-image:hover {
     transform: scale(1.02);
     box-shadow: 0 0 20px rgba(0, 230, 255, 0.4);
+}
+
+@media (max-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+    .project-link {
+        min-height: 54px;
+        padding: 1.2rem;
+        margin: 0.5rem 0;
+        -webkit-tap-highlight-color: rgba(0, 214, 255, 0.3);
+    }
+    
+    .hamburger-menu, .back-to-home {
+        min-width: 60px;
+        min-height: 60px;
+        margin: env(safe-area-inset-top) 12px 12px;
+    }
 }

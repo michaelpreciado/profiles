@@ -121,4 +121,16 @@
     body {
         -webkit-font-smoothing: auto;
     }
+}
+
+/* Fix for Safari font rendering */
+@media (-webkit-touch-callout: none) {
+    body {
+        -webkit-font-smoothing: subpixel-antialiased;
+        text-shadow: 0 0 1px rgba(0,0,0,0.01);
+    }
+    
+    .project-card {
+        transform: translateZ(0);
+    }
 } 

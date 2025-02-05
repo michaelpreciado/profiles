@@ -122,7 +122,8 @@
     border-left: 2px solid var(--term-cyan);
     padding: 2rem;
     backdrop-filter: blur(10px);
-    overflow-y: auto;
+    overflow-y: overlay;
+    -webkit-overflow-scrolling: touch;
     will-change: transform;
 }
 
@@ -328,11 +329,25 @@
     }
     
     .main-header {
-        padding: 1rem;
+        height: 60px;
+        padding: 0 var(--space-sm);
     }
     
     .hamburger-menu {
-        margin-right: 0;
+        position: fixed;
+        bottom: var(--space-md);
+        right: var(--space-md);
+        top: auto;
+        border-radius: 50%;
+        width: 56px;
+        height: 56px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    
+    .back-to-home {
+        position: fixed;
+        bottom: var(--space-md);
+        left: var(--space-md);
     }
 
     .contact-item {
@@ -433,4 +448,24 @@ body.sidebar-open {
         font-size: 1.3rem;
         margin: 0;
     }
+}
+
+.hamburger-menu, 
+.back-to-home {
+  position: fixed;
+  bottom: var(--space-md);
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+
+.hamburger-menu { right: var(--space-md); }
+.back-to-home { left: var(--space-md); }
+
+/* Hide scrollbar when not scrolling */
+.sidebar::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
 } 
