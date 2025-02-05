@@ -438,43 +438,22 @@ body::after {
     }
 
     .profile-social-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--space-sm);
         justify-content: center;
-        width: 100%;
-        padding: 0;
-        margin: var(--space-md) 0;
-        list-style: none;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 90%;
     }
 
     .profile-social-links li {
-        width: calc(33.33% - var(--space-sm));
-        margin: 0;
-        padding: 0;
+        width: auto;
+        flex: 0 0 auto;
+        margin: 0 var(--space-2xs);
     }
 
     .profile-social-links a {
-        width: 100%;
-        min-width: 80px;
-        max-width: 120px;
-        margin: 0;
-        padding: var(--space-xs);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        text-decoration: none;
-        color: var(--term-cyan);
-        border: 1px solid var(--term-cyan-dark);
-        border-radius: 8px;
-        transition: all var(--transition-normal);
-    }
-
-    .profile-social-links a:hover {
-        background: rgba(0, 214, 255, 0.1);
-        border-color: var(--term-cyan);
-        box-shadow: var(--term-glow);
+        margin: 0 auto;
+        max-width: none;
+        width: max-content;
     }
 
     .profile-card, 
