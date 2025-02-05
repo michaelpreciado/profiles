@@ -118,13 +118,18 @@
     z-index: 1001;
     transform: translateX(100%);
     transition: transform var(--transition-normal);
-    background: rgba(0, 18, 21, 0.95);
-    border-left: 2px solid var(--term-cyan);
+    background: rgba(0, 18, 21, 0.98);
+    border-left: 2px solid var(--term-cyan-bright);
     padding: 2rem;
     backdrop-filter: blur(10px);
     overflow-y: overlay;
     -webkit-overflow-scrolling: touch;
     will-change: transform;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 40, 45, 0.95) 0%,
+        rgba(0, 18, 21, 0.98) 100%
+    );
 }
 
 .sidebar.active {
@@ -149,7 +154,8 @@
     color: var(--term-cyan-bright);
     margin-bottom: 2rem;
     text-align: center;
-    text-shadow: var(--term-glow);
+    text-shadow: 0 0 15px rgba(0, 230, 255, 0.5);
+    -webkit-text-stroke: 0.5px var(--term-cyan);
 }
 
 .contact-info {
@@ -159,19 +165,20 @@
 }
 
 .contact-item {
-    background: rgba(0, 230, 255, 0.1);
-    border: 1px solid var(--term-cyan);
+    background: rgba(0, 30, 35, 0.95);
+    border: 1px solid var(--term-cyan-bright);
     border-radius: 12px;
     padding: 1rem;
     display: flex;
     align-items: center;
     gap: 1rem;
-    color: var(--term-cyan);
+    color: var(--term-cyan-bright);
     text-decoration: none;
     transform: translateX(-10px);
     opacity: 0;
     transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
     will-change: transform, opacity;
+    box-shadow: 0 0 10px rgba(0, 230, 255, 0.2);
 }
 
 .sidebar.active .contact-item {
@@ -193,6 +200,11 @@
     background: rgba(0, 230, 255, 0.2);
     transform: translateX(5px);
     box-shadow: 0 0 15px var(--term-cyan);
+}
+
+.contact-item span {
+    font-weight: 500;
+    text-shadow: 0 0 8px rgba(0, 230, 255, 0.4);
 }
 
 /* Mobile Optimizations */
@@ -239,8 +251,8 @@
     position: absolute;
     top: 1rem;
     right: 1rem;
-    background: rgba(0, 230, 255, 0.1);
-    border: 2px solid var(--term-cyan);
+    background: rgba(0, 30, 35, 0.95);
+    border: 2px solid var(--term-cyan-bright);
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -250,6 +262,7 @@
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
     will-change: transform;
+    box-shadow: 0 0 8px rgba(0, 230, 255, 0.3);
 }
 
 .close-sidebar:hover {
@@ -468,4 +481,6 @@ body.sidebar-open {
 .sidebar::-webkit-scrollbar {
     width: 0;
     background: transparent;
-} 
+}
+
+{{ necessary_changes }} 

@@ -424,20 +424,60 @@
 
 .content-container {
     margin-top: var(--space-lg);
-    padding-top: var(--space-md);
+    padding: var(--space-xl) var(--space-md);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-xl);
+    gap: var(--space-2xl);
     width: 100%;
     max-width: var(--content-width-lg);
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Add consistent card alignment */
+.profile-card, 
+.bio-cards {
+    width: 100%;
+    max-width: 800px;
+    padding: var(--space-xl);
+    border: 2px solid var(--term-cyan);
+    border-radius: 16px;
+    background: rgba(0, 18, 21, 0.9);
+    box-shadow: 0 0 20px rgba(0, 230, 255, 0.1);
+}
+
+/* Improve text alignment */
+.profile-header-text,
+.job-ready-description {
+    text-align: center;
     margin-left: auto;
     margin-right: auto;
-    padding-left: var(--space-md);
-    padding-right: var(--space-md);
-    box-sizing: border-box;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
+    max-width: 800px;
+}
+
+/* Grid alignment for bio cards */
+.bio-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-lg);
+    justify-items: center;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .content-container {
+        padding: var(--space-lg) var(--space-sm);
+        gap: var(--space-xl);
+    }
+    
+    .profile-card,
+    .bio-cards {
+        padding: var(--space-md);
+        width: 95%;
+    }
+    
+    .bio-cards {
+        grid-template-columns: 1fr;
+    }
 } 
