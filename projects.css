@@ -5,12 +5,17 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 0;
+    opacity: 0.8;
+    mix-blend-mode: screen;
+    filter: brightness(1.2) contrast(1.1);
 }
 
 .projects-container {
     position: relative;
     z-index: 1;
+    background: rgba(0, 18, 21, 0.7);
+    backdrop-filter: blur(3px);
 }
 
 /* Mobile-first base styles */
@@ -23,8 +28,11 @@
 }
 
 .project-card {
+    position: relative;
+    z-index: 2;
     min-height: 280px;
-    background: rgba(0, 18, 21, 0.8);
+    background: rgba(0, 18, 21, 0.85);
+    backdrop-filter: blur(5px);
     border: 1px solid var(--term-cyan-dark);
 }
 
@@ -267,56 +275,55 @@
 @media (max-width: 768px) {
     .projects-container {
         max-width: 100%;
-        padding: 6rem 1rem 2rem;
+        padding: 4rem 1rem 2rem;
         -webkit-overflow-scrolling: touch;
     }
 
     .projects-header {
-        text-align: left;
-        padding: 0 0.5rem;
-        margin-bottom: 2rem;
+        text-align: center;
+        padding: 0 1rem;
+        margin-bottom: 1.5rem;
     }
 
     .projects-header h1 {
-        font-size: 1.25rem;
+        font-size: 1.5rem;
         margin-bottom: 0.5rem;
         letter-spacing: 0.02em;
-        margin-top: 2rem;
+        margin-top: 1.5rem;
     }
 
     .projects-header p {
-        font-size: 0.9rem;
-        line-height: 1.5;
+        font-size: 1rem;
+        line-height: 1.4;
         margin-top: 0.5rem;
         opacity: 0.9;
         color: var(--term-cyan-dim);
     }
 
     .project-card {
-        min-height: auto;
-        border-radius: 16px;
         margin: 0 0 1rem;
         background: rgba(0, 18, 21, 0.85);
         border: 1px solid var(--term-cyan-dark);
+        border-radius: 12px;
     }
 
     .project-image {
-        height: 180px;
-        border-radius: 16px 16px 0 0;
+        height: 160px;
+        border-radius: 12px 12px 0 0;
     }
 
     .project-content {
-        padding: 0.75rem;
+        padding: 0.5rem;
         gap: 0.5rem;
     }
 
     .project-title {
-        font-size: 1rem;
+        font-size: 1.1rem;
         margin-bottom: 0.25rem;
     }
 
     .project-description {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         line-height: 1.4;
         margin-bottom: 0.5rem;
     }
@@ -326,23 +333,10 @@
         margin-top: 0.5rem;
     }
 
-    .project-tag {
-        font-size: 0.7rem;
-        padding: 0.25rem 0.5rem;
-        border-radius: 12px;
-    }
-
-    .project-links {
-        display: flex;
-        gap: 0.75rem;
-        margin-top: 0.75rem;
-        justify-content: flex-start;
-    }
-
     .project-link {
-        font-size: 0.75rem;
+        font-size: 0.8rem;
         padding: 0.4rem 0.75rem;
-        border-radius: 16px;
+        border-radius: 12px;
         background: rgba(0, 230, 255, 0.08);
         border: 1px solid var(--term-cyan-dark);
         min-height: 32px;
@@ -356,13 +350,11 @@
         margin-right: 0.3rem;
     }
 
-    /* X-style touch feedback */
     .project-link:active {
         background: rgba(0, 230, 255, 0.15);
         transform: scale(0.97);
     }
 
-    /* Improved card interaction */
     .project-card {
         transition: transform 0.2s ease;
     }
